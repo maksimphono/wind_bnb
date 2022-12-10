@@ -3,7 +3,7 @@ import "./css/header.scss";
 export default function (props) {
     return (
         <div className = "header">
-            <div className = "brand"></div>
+            <div className = "brand">Wind BnB</div>
             <form className = "search">
                 <input className = "search-bar location" type = "text" placeholder="Search"/>
                 <input className = "search-bar guests" type = "text" placeholder="Search"/>

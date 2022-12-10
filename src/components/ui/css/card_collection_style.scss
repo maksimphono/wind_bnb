@@ -1,11 +1,17 @@
 @use "./constants.scss";
 
+.stay-location {
+    margin-bottom: 25px;
+    height: max-content;
+}
+
 .card-collection {
     display: flex;
-    //grid-template-columns: repeat(3, 1fr);
-    justify-content: center;
+    justify-content: flex-start;
+    flex-direction: row;
     width: 100%;
-    padding: 0 3%;
+    height: max-content;
     gap: 35px;
     flex-wrap: wrap;
 }
+
