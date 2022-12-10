@@ -1,7 +1,11 @@
+@use "./constants.scss";
+
 .card-collection {
     display: flex;
-    justify-content: space-evenly;
-    width: auto;
-    gap: auto;
+    //grid-template-columns: repeat(3, 1fr);
+    justify-content: center;
+    width: 100%;
+    padding: 0 3%;
+    gap: 35px;
     flex-wrap: wrap;
 }

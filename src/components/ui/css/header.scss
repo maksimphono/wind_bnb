@@ -1,0 +1,91 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 60px;
+    margin-bottom: 1rem;
+    
+    .search {
+        display: flex;
+        justify-content: space-between;
+        width: 297px;
+        height: 55px;
+        //grid-template-columns: 50px auto 55px;
+        box-shadow: 0 1px 6px #000a;
+        gap: auto;
+        border-radius: 16px;
+
+        .search-bar {
+            border: none;
+            border-right: 1px solid #000;
+            display: flex;
+            width: auto;
+            max-width: 40%;
+            padding: 0 5%;
+            height: 100%;
+            background: #0000;
+            font-size: 100%;
+            outline: none;
+        }
+
+        .search-btn {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            width: auto;
+            aspect-ratio: 1 / 1;
+            border: none;
+            border-radius: inherit;
+            background: #0000;
+            cursor: pointer;
+            &:hover {
+                background: rgb(222, 222, 222);
+            }
+        }
+
+        .additional-filters {
+            display: none;
+            visibility: hidden;
+            position: absolute;
+            left: 50vw;
+            top: 60px;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-evenly;
+            width: 80vw;
+            min-height: 200px;
+            height: max-content;
+            background: rgb(236, 236, 236);
+            transform: translate(-50%);
+            border-radius: 1rem;
+            box-shadow: 0 5px 15px #000;
+
+            .filter {
+                display: flex;
+                justify-content: center;
+                width: 50%;
+
+                input[type=radio] {
+                    all: unset;
+                    display: flex;
+                    flex-wrap: wrap;
+                    width: 80%;
+                    min-height: 60px;
+                    height: max-content;
+                    background: rgb(181, 181, 181);
+                    border-radius: .5rem;
+                    cursor: pointer;
+    
+                    &:checked, &:hover {
+                        outline: 3px solid rgb(244, 73, 73);
+                        box-shadow: 0 0 20px rgb(87, 87, 87);
+                    }
+                }
+            }
+
+            
+        }
+    }
+}
