@@ -7,64 +7,101 @@
     margin-bottom: 1rem;
     padding: 32px 0;
     
-    .search {
+    form.search {
+        $form-search-width: 297px;
         display: flex;
         justify-content: space-between;
         width: 297px;
         height: 55px;
         //grid-template-columns: 50px auto 55px;
         box-shadow: 0 1px 6px #000a;
-        gap: auto;
+        gap: 0;
         border-radius: 16px;
+        transition: .5s;
+
+        &:focus, &:hover {
+            width: 100%;
+
+            .search__label {
+                display: inline;
+            }
+        }
 
         .search-bar {
+            all: unset;
+            flex-grow: 1;
             border: none;
-            border-right: 1px solid #000;
+            border-radius: 16px;
             display: flex;
+            flex-flow: column wrap;
+            justify-content: center;
+            align-items: start;
             width: auto;
             max-width: 40%;
             padding: 0 5%;
             height: 100%;
-            background: #0000;
+            background: #fff4;
             font-size: 100%;
-            outline: none;
+            overflow-y: hidden;
+            cursor: pointer;
+
+            span:first-child {
+                font-weight: 600;
+            }
+
+            &:focus, &:hover {
+                height: 95%;
+                //border-radius: 16px 0 0 16px;
+                border: 2px solid #000;
+            }
         }
 
-        .search-btn {
+        .search-btn-wrapper {
+            flex-grow: 1;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100%;
             width: auto;
-            aspect-ratio: 1 / 1;
             border: none;
             border-radius: inherit;
             background: #0000;
             cursor: pointer;
-            &:hover {
-                background: rgb(222, 222, 222);
+            
+            button.search-btn {
+                all: inherit;
+                display: inline-flex;
+                justify-self: start;
+                aspect-ratio: 1 / 1;
+                max-width: 126px;
+                background:#EB5757;
+
+                .search__label {
+                    display: none;
+                }
+
+                &:hover {
+                    background:#EB575790;
+                }
             }
         }
 
         .additional-filters {
-            display: none;
-            visibility: hidden;
+            display: none !important;
             position: absolute;
-            left: 50vw;
-            top: 60px;
-            padding: 1rem;
+            left: 0;
+            top: 0;
             display: flex;
             justify-content: space-evenly;
-            width: 80vw;
-            min-height: 200px;
+            width: 100vw;
+            min-height: 460px;
             height: max-content;
             background: rgb(236, 236, 236);
-            transform: translate(-50%);
             border-radius: 1rem;
             box-shadow: 0 5px 15px #000;
 
             .filter {
-                display: flex;
+                display: none;
                 justify-content: center;
                 width: 50%;
 
