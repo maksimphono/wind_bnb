@@ -6,53 +6,74 @@
     height: max-content;
     margin-bottom: 1rem;
     padding: 32px 0;
-    
+
     form.search {
         $form-search-width: 297px;
         display: flex;
         justify-content: space-between;
         width: 297px;
         height: 55px;
-        //grid-template-columns: 50px auto 55px;
         box-shadow: 0 1px 6px #000a;
         gap: 0;
         border-radius: 16px;
         transition: .5s;
 
-        &:focus, &:hover {
+        &:hover {
             width: 100%;
-
-            .search__label {
-                display: inline;
-            }
+            
         }
-
+        
         .search-bar {
             all: unset;
             flex-grow: 1;
-            border: none;
+            border: 2px solid#0000;
             border-radius: 16px;
-            display: flex;
-            flex-flow: column wrap;
-            justify-content: center;
-            align-items: start;
+            display: block;
             width: auto;
-            max-width: 40%;
-            padding: 0 5%;
-            height: 100%;
+            max-width: 35%;
+            height: 95%;
             background: #fff4;
             font-size: 100%;
-            overflow-y: hidden;
+            overflow-y: visible;
             cursor: pointer;
+            
+            .summary {
+                all: unset;
+                display: flex;
+                flex-direction: column;
+                width: 100%;
+                max-width: 100%;
+                height: 85%;
+                margin: 5px 10%;
+                overflow: hidden;
 
-            span:first-child {
-                font-weight: 600;
+                span {
+                    word-wrap: nowrap;
+                }
+                
+                span:first-child {
+                    font-weight: 600;
+                }
+            }
+
+            .selection {
+                all: unset;
+                position: relative;
+                top: 5%;
+                display: flex;
+                width: 100%;
+                height: auto;
+                background: rgb(123, 121, 121);
+                transition: .5s;
             }
 
             &:focus, &:hover {
-                height: 95%;
-                //border-radius: 16px 0 0 16px;
-                border: 2px solid #000;
+                border-color:#000;
+            }
+            &:focus {
+                .select__location {
+                    display: block;
+                }
             }
         }
 
@@ -76,22 +97,22 @@
                 max-width: 126px;
                 background:#EB5757;
 
-                .search__label {
+                span.search__label {
                     display: none;
                 }
 
                 &:hover {
                     background:#EB575790;
+                    
                 }
             }
         }
 
         .additional-filters {
-            display: none !important;
             position: absolute;
             left: 0;
             top: 0;
-            display: flex;
+            display: none;
             justify-content: space-evenly;
             width: 100vw;
             min-height: 460px;
@@ -121,9 +142,7 @@
                         box-shadow: 0 0 20px rgb(87, 87, 87);
                     }
                 }
-            }
-
-            
+            }           
         }
     }
 }

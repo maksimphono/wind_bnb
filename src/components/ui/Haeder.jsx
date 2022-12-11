@@ -7,18 +7,27 @@ export default function (props) {
         <div className = "header">
             <div className = "brand">Wind BnB</div>
             <form className = "search">
-                <button className = "search-bar location" name = "search__filters">
-                    <span>Location</span>
-                    <span>Helsinki, Finland</span>
-                </button>
-                <button className = "search-bar guests" name = "search__filters">
-                    <span>Guests</span>
-                    <span>4 adults</span>
-                </button>
+                <div className = "search-bar location" name = "search__filters">
+                    <div className = "summary">
+                        <span>Location</span>
+                        <span>Helsinki, Finland</span>
+                    </div>
+                    <div className = "selection">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis necessitatibus dolorum aut voluptates ut non ducimus sunt est, dicta consequatur impedit quaerat consectetur itaque repellat eius sit eveniet fuga expedita.
+                    </div>
+                </div>
+                <div className = "search-bar guests" name = "search__filters">
+                    <div className = "summary">
+                        <span>Guests</span>
+                        <span>4 adults</span>
+                    </div>
+                    <div className = "selection">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis necessitatibus dolorum aut voluptates ut non ducimus sunt est, dicta consequatur impedit quaerat consectetur itaque repellat eius sit eveniet fuga expedita.
+                    </div>
+                </div>
                 <div className = "search-btn-wrapper">
                     <button className = "search-btn">
-
-                        <span className = "search__label">Search</span>
+                        <span className = "search__label">P Search</span>
                     </button>
                 </div>
                 
