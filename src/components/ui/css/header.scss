@@ -43,8 +43,8 @@
                 flex-direction: column;
                 width: 100%;
                 max-width: 100%;
-                height: 85%;
-                margin: 5px 10%;
+                height: 75%;
+                padding: 7px 10%;
                 overflow: hidden;
 
                 span {
@@ -59,6 +59,7 @@
             .selection {
                 all: unset;
                 position: relative;
+                opacity: 1;
                 top: 5%;
                 display: flex;
                 width: 100%;
@@ -66,6 +67,7 @@
                 background: rgb(228, 228, 228);
                 transition: .5s;
                 border-radius: 0 0 15px 15px;
+                overflow: hidden;
 
                 ul.selection {
                     all: unset;
@@ -76,7 +78,7 @@
                     flex-direction: column;
                     overflow: hidden;
                     border-radius: inherit;
-                    background: linear-gradient( rgb(231, 231, 231),  rgb(206, 206, 206));
+                    background: linear-gradient(rgb(231, 231, 231),  rgb(206, 206, 206));
 
                     li {
                         all: unset;
