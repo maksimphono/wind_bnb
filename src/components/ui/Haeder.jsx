@@ -14,22 +14,32 @@ export function toggleElem(elem, hide) {
 }
 
 export default function (props) {
-    const selectItemsLocationRef = useRef();
-    const selectItemsGuestsRef = useRef();
+    const [showLocationSelect, setShowLocationSelect] = useState(false);
+    const [showGuestsSelect, setShowGuestsSelect] = useState(false);
 
-    const onHideUlSelection = ({target}) => {
-        for (let elem of [selectItemsLocationRef.current, selectItemsGuestsRef.current]) {
-            toggleElem(elem, true);
-        }
+    const onToggleSelection = (val) => {
+        setShowLocationSelect(val);
+        setShowGuestsSelect(val);
+        console.log("Mouse leave");
     }
 
     return (
         <div className = "header">
             <div className = "brand">Wind BnB</div>
-            <form className = "search" onMouseLeave={onHideUlSelection}>
+            <form className = "search" onMouseLeave={(e) => onToggleSelection(false)}>
 
-                <FilterInSearchBar ref = {selectItemsLocationRef} title = "Location" list = {["Finland, Helsinki", "Finland, Guavar"]} />
-                <FilterInSearchBar ref = {selectItemsGuestsRef} title = "Guests" list = {["2 guests", "4 guests"]} />
+                <FilterInSearchBar 
+                    show = {showLocationSelect}
+                    toggle = {setShowLocationSelect}
+                    title = "Location" 
+                    list = {["Finland, Helsinki", "Finland, Guavar"]}
+                />
+                <FilterInSearchBar 
+                    show = {showGuestsSelect}
+                    toggle = {setShowGuestsSelect} 
+                    title = "Guests" 
+                    list = {["2 guests", "4 guests"]}
+                />
                 <SearchButton />
             
             </form>

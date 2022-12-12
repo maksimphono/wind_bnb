@@ -1,18 +1,18 @@
 import {useRef, useMemo, useEffect} from "react";
 import React from "react";
 import $ from "jquery";
+import { toggleElem } from "./Haeder";
 
-export default React.forwardRef(function(props, selectionDivRef) {
+export default React.forwardRef(function(props, ref) {
     const selectedItemRef = useRef();
-    //const selectionDivRef = ref;
-    let $selectedItemSpan;
-    let $selectionDiv;
-
+    const selectionDivRef = useRef();
+    const $selectedItemSpan = $(selectedItemRef.current);
+    const $selectionDiv = $(selectionDivRef.current);
+    
     useEffect(() => {
-        $selectedItemSpan = $(selectedItemRef.current);
-        $selectionDiv = $(selectionDivRef.current);
-    }, []);
-
+        $selectionDiv?.find("ul.selection").css("height", !props.show? "0px": "max-content");
+    }, [props.show]);
+    
     const onSelectItem = ({target}) => {
         const $target = $(target);
         
@@ -20,13 +20,7 @@ export default React.forwardRef(function(props, selectionDivRef) {
     }
 
     const onToggleSelection = (event) => {
-        const isVisiable = Number($selectionDiv.css("opacity"));
-        console.log($selectionDiv, isVisiable);
-        $selectionDiv.css({
-                "opacity": "" + Number(!isVisiable),
-            }
-        );
-        $selectionDiv.find("ul.selection").css("height", isVisiable? "0px": "max-content");
+        props.toggle(v => !v);
     }
     
     return (
@@ -38,6 +32,7 @@ export default React.forwardRef(function(props, selectionDivRef) {
             <div 
                 ref = {selectionDivRef} 
                 className = "selection"
+                style = {{opacity : "" + Number(props.show)}}
             >
                 <ul className = "selection">
                     {props.list && props.list.map(
