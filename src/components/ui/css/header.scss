@@ -59,7 +59,7 @@
             .selection {
                 all: unset;
                 position: relative;
-                opacity: 1;
+                opacity: 0;
                 top: 5%;
                 display: flex;
                 width: 100%;
@@ -74,11 +74,11 @@
                     display: flex;
                     justify-content: center;
                     width: 100%;
-                    height: max-content;
+                    height: 0;
                     flex-direction: column;
                     overflow: hidden;
                     border-radius: inherit;
-                    background: linear-gradient(rgb(231, 231, 231),  rgb(206, 206, 206));
+                    background: linear-gradient(rgb(244, 244, 244),  rgb(228, 228, 228));
 
                     li {
                         all: unset;

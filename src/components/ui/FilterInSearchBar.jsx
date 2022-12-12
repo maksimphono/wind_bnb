@@ -1,9 +1,10 @@
 import {useRef, useMemo, useEffect} from "react";
+import React from "react";
 import $ from "jquery";
 
-export default function(props) {
+export default React.forwardRef(function(props, selectionDivRef) {
     const selectedItemRef = useRef();
-    const selectionDivRef = useRef();
+    //const selectionDivRef = ref;
     let $selectedItemSpan;
     let $selectionDiv;
 
@@ -19,14 +20,13 @@ export default function(props) {
     }
 
     const onToggleSelection = (event) => {
-        const cssOpacity = Number($selectionDiv.css("opacity"));
-
-        //console.log(cssOpacity);
+        const isVisiable = Number($selectionDiv.css("opacity"));
+        console.log($selectionDiv, isVisiable);
         $selectionDiv.css({
-                "opacity": "" + Number(!cssOpacity),
+                "opacity": "" + Number(!isVisiable),
             }
         );
-        $selectionDiv.find("ul.selection").css("height", cssOpacity? "0px": "max-content");
+        $selectionDiv.find("ul.selection").css("height", isVisiable? "0px": "max-content");
     }
     
     return (
@@ -51,5 +51,5 @@ export default function(props) {
             </div>
         </div>
     )
-}
+})
 
