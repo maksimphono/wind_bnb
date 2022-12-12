@@ -1,55 +1,19 @@
 import "./css/header.scss";
 //import searchIcon from "../../assets/icons/search__icon.svg";
 import logo from "../../logo.svg"
+import FilterInSearchBar from "./FilterInSearchBar";
+import SearchButton from "./SearchButton";
 
 export default function (props) {
     return (
         <div className = "header">
             <div className = "brand">Wind BnB</div>
             <form className = "search">
-                <div className = "search-bar location" name = "search__filters">
-                    <div className = "summary">
-                        <span>Location</span>
-                        <span>Helsinki, Finland</span>
-                    </div>
-                    <div className = "selection">
-                        <ul className = "selection">
-                            <li>
-                                <input type = "radio" name = "select__location" />
-                                <label>Finland, Helsinki</label>
-                            </li>
-                            <li>
-                                <input type = "radio" name = "select__location" />
-                                <label>Finland, Guavar</label>
-                            </li>
-                        </ul>
-                        
-                    </div>
-                </div>
-                <div className = "search-bar guests" name = "search__filters">
-                    <div className = "summary">
-                        <span>Guests</span>
-                        <span>4 adults</span>
-                    </div>
-                    <div className = "selection">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis necessitatibus dolorum aut voluptates ut non ducimus sunt est, dicta consequatur impedit quaerat consectetur itaque repellat eius sit eveniet fuga expedita.
-                    </div>
-                </div>
-                <div className = "search-btn-wrapper">
-                    <button className = "search-btn">
-                        <span className = "search__label">P Search</span>
-                    </button>
-                </div>
-                
-                <div className = "additional-filters">
-                    <div className = "filter">
-                        <input checked type = "radio" name = "radio1"/>  
-                    </div>
-                    <div className = "filter">
-                        <input type = "radio" name = "radio1"/>
-                    </div>
-                </div>
-                
+
+                <FilterInSearchBar title = "Location" list = {["Finland, Helsinki", "Finland, Guavar"]} />
+                <FilterInSearchBar title = "Guests" list = {["2 guests", "4 guests"]} />
+                <SearchButton />
+            
             </form>
         </div>
     )
