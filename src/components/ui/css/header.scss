@@ -63,8 +63,46 @@
                 display: flex;
                 width: 100%;
                 height: auto;
-                background: rgb(123, 121, 121);
+                background: rgb(228, 228, 228);
                 transition: .5s;
+                border-radius: 0 0 15px 15px;
+
+                ul.selection {
+                    all: unset;
+                    display: flex;
+                    justify-content: center;
+                    width: 100%;
+                    height: max-content;
+                    flex-direction: column;
+                    overflow: hidden;
+                    border-radius: inherit;
+
+                    li {
+                        all: unset;
+                        display: flex;    
+                        align-items: center;
+                        max-width: 90%;
+                        height: auto;
+                        font-size: 1.2rem;
+                        padding: 3% 5%;
+                        background: rgb(231, 231, 231);
+                        
+                        &::after {
+                            content: '';
+                            position: absolute;
+                            top: 50%;
+                            display: block;
+                            background: rgb(106, 106, 106);
+                            width: 90%;
+                            height: 2px;
+                            z-index: 2;
+                        }
+                        
+                        &:last-child {
+                            border-radius: inherit;
+                        }
+                    }
+                }
             }
 
             &:focus, &:hover {

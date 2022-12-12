@@ -13,7 +13,17 @@ export default function (props) {
                         <span>Helsinki, Finland</span>
                     </div>
                     <div className = "selection">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis necessitatibus dolorum aut voluptates ut non ducimus sunt est, dicta consequatur impedit quaerat consectetur itaque repellat eius sit eveniet fuga expedita.
+                        <ul className = "selection">
+                            <li>
+                                <input type = "radio" name = "select__location" />
+                                <label>Finland, Helsinki</label>
+                            </li>
+                            <li>
+                                <input type = "radio" name = "select__location" />
+                                <label>Finland, Guavar</label>
+                            </li>
+                        </ul>
+                        
                     </div>
                 </div>
                 <div className = "search-bar guests" name = "search__filters">
