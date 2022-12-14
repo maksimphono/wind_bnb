@@ -20,6 +20,7 @@
 
         &:hover {
             width: 100%;
+            
         }
         
         .search-bar {
@@ -102,6 +103,51 @@
                         &:last-child {
                             border-radius: inherit;
                         }
+
+                        .guests__counter {
+                            display: flex;
+                            flex-direction: column;
+                            gap: 5px;
+
+                            .title {
+                                font-weight: 600;
+                            }
+
+                            .subtitle {
+                                color:rgb(106, 106, 106, .7);
+                                font-size: .8em;
+                            }
+
+                            .counter__wrapper {
+                                display: flex;
+                                justify-content: space-between;
+                                width: 100px;
+
+                                button[type=button] {
+                                    all: unset;
+                                    display: flex;
+                                    justify-content: center;
+                                    align-items: center;
+                                    aspect-ratio: 1 / 1;
+                                    height: 20px;
+                                    font-size: 100%;
+                                    background: #fff;
+                                    border: 2px solid #000;
+                                    border-radius: 5px;
+                                }
+                            }
+
+                            input[type=number] {
+                                all: unset;
+                                display: flex;
+                                text-align: center;
+                                width: auto;
+                                &::-webkit-inner-spin-button,
+                                &::-webkit-outer-spin-button {
+                                    -webkit-appearance: none;
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -114,6 +160,8 @@
                     display: block;
                 }
             }
+
+            
         }
 
         .search-btn-wrapper {
@@ -137,7 +185,7 @@
                 background:#EB5757;
 
                 span.search__label {
-                    display: flex;
+                    display: none;
                 }
 
                 &:hover {
@@ -146,5 +194,6 @@
                 }
             }
         }
+
     }
 }

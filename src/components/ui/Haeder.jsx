@@ -3,17 +3,15 @@ import "./css/header.scss";
 //import searchIcon from "../../assets/icons/search__icon.svg";
 import logo from "../../logo.svg"
 import FilterInSearchBar from "./FilterInSearchBar";
-import FilterGuestsInSearchBar from "./FilterGuestsInSearchBar.jsx";
+import FilterGuestsInSearchBar from "./FilterGuestsInSearchBar";
 import SearchButton from "./SearchButton";
 import $ from "jquery";
 
-export function toggleElem(elem, hide, childrenToHide = ["ul.selection"]) {
+export function toggleElem(elem, hide) {
     $(elem).css({
         "opacity": "" + +hide,
     });
-    for (let childSelector of childrenToHide) {
-        $(elem).find(childSelector).css("height", hide? "0px" : "max-content");
-    }
+    $(elem).find("ul.selection").css("height", hide? "0px" : "max-content");
 }
 
 export default function (props) {
@@ -24,16 +22,14 @@ export default function (props) {
     const onToggleSelection = (val) => {
         setShowLocationSelect(val);
         setShowGuestsSelect(val);
-        toggleSearchLabel(val)
+        toggleSearchLabel(false);
+        console.log("Mouse leave");
     }
 
     return (
         <div className = "header">
             <div className = "brand">Wind BnB</div>
-            <form
-                className = "search"
-                onMouseLeave = {(e) => onToggleSelection(false)}
-                onMouseEnter = {(e) => toggleSearchLabel(true)}>
+            <form className = "search" onMouseEnter={(e) => toggleSearchLabel(true)} onMouseLeave={(e) => onToggleSelection(false)}>
 
                 <FilterInSearchBar 
                     show = {showLocationSelect}
@@ -44,9 +40,11 @@ export default function (props) {
                 <FilterGuestsInSearchBar 
                     show = {showGuestsSelect}
                     toggle = {setShowGuestsSelect} 
-                    title = "Guests" 
+                    title = "Guests"
                 />
-                <SearchButton showSearchLabel = {showSearchLabel} />
+                <SearchButton
+                    showSearchLabel = {showSearchLabel}
+                />
             
             </form>
         </div>

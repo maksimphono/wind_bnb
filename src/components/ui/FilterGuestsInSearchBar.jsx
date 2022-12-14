@@ -28,7 +28,7 @@ export default React.forwardRef(function(props, ref) {
         <div className = "search-bar" name = "search__filters">
             <div className = "summary" onClick = {onToggleSelection}>
                 <span>{props.title}</span>
-                <span ref = {selectedItemRef}>{99}</span>
+                <span ref = {selectedItemRef}>{+adultsNumber + +childrenNumber} guests</span>
             </div>
             <div 
                 ref = {selectionDivRef} 
@@ -41,7 +41,10 @@ export default React.forwardRef(function(props, ref) {
                             title = "Adults" 
                             subtitle = "Ages 13 or above" 
                             initialValue = {1}
-                            ref = {adultsCounterRef} 
+                            max = {8}
+                            min = {1}
+                            ref = {adultsCounterRef}
+                            setter = {setAdultsNumber} 
                         />
                     </li>
                     <li>
@@ -49,7 +52,10 @@ export default React.forwardRef(function(props, ref) {
                             title = "Children" 
                             subtitle = "Ages 2 - 12" 
                             initialValue = {0}
-                            ref = {childrenCounterRef} 
+                            max = {8}
+                            min = {0}
+                            ref = {childrenCounterRef}
+                            setter = {setChildrenNumber} 
                         />
                     </li>
                 </ul>          
