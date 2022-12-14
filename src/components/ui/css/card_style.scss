@@ -1,26 +1,29 @@
+@import "/src/assets/settings";
+
 .wind-card {
     display: flex;
     flex-direction: column;
-    gap: .5rem;
-    align-items: flex-start;
-    max-width: 395px;
-    width: auto;
+    justify-content: start;
+    gap: $gap-within-card;
+    max-width: auto;
     height: max-content;
-    border-radius: 24px;
+    border-radius: $card-border-radius;
     padding-bottom: .5rem;
-
+    cursor: pointer;
+    
     .preview-image {
         display: block;
-        width: 100%;
+        width: auto;
         height: 50%;
         
         img {
+            object-fit: contain;
             display: block;
-            border-radius: 24px;
-            height: auto;
-            width: auto;
-            max-width: 395px;
-            max-height: 269px;
+            border-radius: $card-border-radius;
+            height: 100%;
+            width: 100%;
+            //max-width: 395px;
+            //max-height: 269px;
         }
     }
 
@@ -44,12 +47,12 @@
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                width: 100px;
-                height: 28px;
+                width: $super-host-width;
+                height: $super-host-height;
                 background-color: #0000;
                 color: #4F4F4F;
                 border: 2px solid #4F4F4F;
-                border-radius: 12px;
+                border-radius: $super-host-border-radius;
                 font: normal, none, 700, 12px / 15px;
             }
         }
@@ -70,6 +73,5 @@
             width: auto;
             height: max-content;
         }
-    }
-    
+    }    
 }

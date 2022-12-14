@@ -1,3 +1,5 @@
+@import "/src/assets/settings";
+
 .stay-location {
     margin-bottom: 25px;
     height: max-content;
@@ -8,6 +10,18 @@
     grid-template-columns: 1fr 1fr 1fr;
     width: 100%;
     height: max-content;
-    gap: 35px;
+    gap: $gap-between-cards;
 }
 
+
+@media screen and (width < 900px) {
+    .card-collection {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media screen and (width < 500px) {
+    .card-collection {
+        grid-template-columns: 1fr;
+    }
+}
