@@ -7,6 +7,8 @@ import FilterGuestsInSearchBar from "./FilterGuestsInSearchBar";
 import SearchButton from "./SearchButton";
 import $ from "jquery";
 
+import {location_selection_fielt_id, adults_number_field_id, children_number_field_id} from "../../data/fields_html_ids.js";
+
 export function toggleElem(elem, hide) {
     $(elem).css({
         "opacity": "" + +hide,
@@ -18,15 +20,14 @@ export default function (props) {
     const [showLocationSelect, setShowLocationSelect] = useState(false);
     const [showGuestsSelect, setShowGuestsSelect] = useState(false);
     const [showSearchLabel, toggleSearchLabel] = useState(false);
-
-    const adultsCounterRef = useRef();
-    const childrenCounterRef = useRef();
-
+    
     const onSubmit = ({target}) => {
         const $target = $(target);
+        console.log(location_selection_fielt_id)
         const content = {
-            location: $target.find("#location_selection_id").data("value"),
-            adults : $(adultsCounterRef.current).data("value")
+            location: $target.find("#" + location_selection_fielt_id).data("value"),
+            adults : $("#" + adults_number_field_id).data("value"),
+            children : $("#" + children_number_field_id).data("value")
         }
         console.table(content);
     }
@@ -47,7 +48,6 @@ export default function (props) {
                 onSubmit = {onSubmit}
             >
                 
-
                 <FilterInSearchBar 
                     show = {showLocationSelect}
                     toggle = {setShowLocationSelect}
@@ -59,8 +59,6 @@ export default function (props) {
                     show = {showGuestsSelect}
                     toggle = {setShowGuestsSelect} 
                     title = "Guests"
-                    adultsCounterRef = {adultsCounterRef}
-                    childrenCounterRef = {childrenCounterRef}
                 />
                 <SearchButton
                     showSearchLabel = {showSearchLabel}

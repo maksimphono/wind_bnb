@@ -3,6 +3,8 @@ import React from "react";
 import $ from "jquery";
 import { toggleElem } from "./Haeder";
 
+import {location_selection_fielt_id} from "../../data/fields_html_ids.js";
+
 export default React.forwardRef(function(props, ref) {
     const [selectedItemIndex, setSelectedItemIndex] = useState(0);
 
@@ -24,7 +26,7 @@ export default React.forwardRef(function(props, ref) {
         <div className = "search-bar" name = "search__filters">
             <div className = "summary" onClick = {onToggleSelectionDiv}>
                 <span>{props.title}</span>
-                <span id = {props.location_selection_id} data-value = {selectedItemIndex}>{props.list[selectedItemIndex] || "No location specified"}</span>
+                <span id = {location_selection_fielt_id} data-value = {selectedItemIndex}>{props.list[selectedItemIndex] || "No location specified"}</span>
             </div>
             <div 
                 ref = {selectionDivRef} 

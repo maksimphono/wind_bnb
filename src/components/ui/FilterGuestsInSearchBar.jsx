@@ -4,6 +4,8 @@ import $ from "jquery";
 import { toggleElem } from "./Haeder";
 import GuestCounter from "./Counter.jsx";
 
+import {adults_number_field_id, children_number_field_id} from "../../data/fields_html_ids.js";
+
 export default function({adultsCounterRef, childrenCounterRef, ...props}) {
     const [adultsNumber, setAdultsNumber] = useState(1);
     const [childrenNumber, setChildrenNumber] = useState(0);
@@ -38,6 +40,7 @@ export default function({adultsCounterRef, childrenCounterRef, ...props}) {
                 <ul className = "selection">
                     <li>
                         <GuestCounter
+                            id = {adults_number_field_id}
                             title = "Adults" 
                             subtitle = "Ages 13 or above" 
                             initialValue = {1}
@@ -49,6 +52,7 @@ export default function({adultsCounterRef, childrenCounterRef, ...props}) {
                     </li>
                     <li>
                         <GuestCounter 
+                            id = {children_number_field_id}
                             title = "Children" 
                             subtitle = "Ages 2 - 12" 
                             initialValue = {0}
