@@ -1,33 +1,30 @@
-import {useRef, useMemo, useEffect} from "react";
+import {useRef, useState, useMemo, useEffect} from "react";
 import React from "react";
 import $ from "jquery";
 import { toggleElem } from "./Haeder";
 
 export default React.forwardRef(function(props, ref) {
-    const selectedItemRef = useRef();
+    const [selectedItemIndex, setSelectedItemIndex] = useState(0);
+
     const selectionDivRef = useRef();
-    const $selectedItemSpan = $(selectedItemRef.current);
-    const $selectionDiv = $(selectionDivRef.current);
     
     useEffect(() => {
-        $selectionDiv?.find("ul.selection").css("height", !props.show? "0px": "max-content");
+        $(selectionDivRef.current)?.find("ul.selection").css("height", !props.show? "0px": "max-content");
     }, [props.show]);
     
-    const onSelectItem = ({target}) => {
-        const $target = $(target);
-        
-        $selectedItemSpan.text($target.text());
+    const onSelectItem = (index) => {
+        setSelectedItemIndex(index);
     }
 
-    const onToggleSelection = (event) => {
+    const onToggleSelectionDiv = (event) => {
         props.toggle(v => !v);
     }
     
     return (
         <div className = "search-bar" name = "search__filters">
-            <div className = "summary" onClick = {onToggleSelection}>
+            <div className = "summary" onClick = {onToggleSelectionDiv}>
                 <span>{props.title}</span>
-                <span ref = {selectedItemRef}>{props.list[0] || "Subtitle"}</span>
+                <span id = {props.location_selection_id} data-value = {selectedItemIndex}>{props.list[selectedItemIndex] || "No location specified"}</span>
             </div>
             <div 
                 ref = {selectionDivRef} 
@@ -37,7 +34,7 @@ export default React.forwardRef(function(props, ref) {
                 <ul className = "selection">
                     {props.list && props.list.map(
                         (item, i) => (
-                            <li key = {i} onClick = {onSelectItem}>
+                            <li key = {i} onClick = {() => onSelectItem(i)}>
                                 {item.toString()}
                             </li>
                         ))

@@ -19,11 +19,16 @@ export default function (props) {
     const [showGuestsSelect, setShowGuestsSelect] = useState(false);
     const [showSearchLabel, toggleSearchLabel] = useState(false);
 
+    const adultsCounterRef = useRef();
+    const childrenCounterRef = useRef();
+
     const onSubmit = ({target}) => {
         const $target = $(target);
         const content = {
-            
+            location: $target.find("#location_selection_id").data("value"),
+            adults : $(adultsCounterRef.current).data("value")
         }
+        console.table(content);
     }
 
     const onToggleSelection = (val) => {
@@ -46,6 +51,7 @@ export default function (props) {
                 <FilterInSearchBar 
                     show = {showLocationSelect}
                     toggle = {setShowLocationSelect}
+                    location_selection_id = "location_selection_id"
                     title = "Location" 
                     list = {["Finland, Helsinki", "Finland, Guavar"]}
                 />
@@ -53,6 +59,8 @@ export default function (props) {
                     show = {showGuestsSelect}
                     toggle = {setShowGuestsSelect} 
                     title = "Guests"
+                    adultsCounterRef = {adultsCounterRef}
+                    childrenCounterRef = {childrenCounterRef}
                 />
                 <SearchButton
                     showSearchLabel = {showSearchLabel}

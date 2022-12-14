@@ -4,12 +4,12 @@ import $ from "jquery";
 import { toggleElem } from "./Haeder";
 import GuestCounter from "./Counter.jsx";
 
-export default React.forwardRef(function(props, ref) {
+export default function({adultsCounterRef, childrenCounterRef, ...props}) {
     const [adultsNumber, setAdultsNumber] = useState(1);
     const [childrenNumber, setChildrenNumber] = useState(0);
 
-    const adultsCounterRef = useRef();
-    const childrenCounterRef = useRef();
+    //const adultsCounterRef = useRef();
+    //const childrenCounterRef = useRef();
     
     const selectedItemRef = useRef();
     const selectionDivRef = useRef();
@@ -37,7 +37,7 @@ export default React.forwardRef(function(props, ref) {
             >
                 <ul className = "selection">
                     <li>
-                        <GuestCounter 
+                        <GuestCounter
                             title = "Adults" 
                             subtitle = "Ages 13 or above" 
                             initialValue = {1}
@@ -62,5 +62,5 @@ export default React.forwardRef(function(props, ref) {
             </div>
         </div>
     )
-})
+}
 

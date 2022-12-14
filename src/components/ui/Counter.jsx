@@ -42,7 +42,7 @@ export default React.forwardRef(function (props, counterRef) {
                 >
                     -
                 </button>
-                <span ref = {counterRef}>{counter}</span>
+                <span ref = {counterRef} data-value = {counter}>{counter}</span>
                 <button 
                     type = "button"
                     className = "control__btn" 
