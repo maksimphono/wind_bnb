@@ -19,17 +19,29 @@ export default function (props) {
     const [showGuestsSelect, setShowGuestsSelect] = useState(false);
     const [showSearchLabel, toggleSearchLabel] = useState(false);
 
+    const onSubmit = ({target}) => {
+        const $target = $(target);
+        const content = {
+            
+        }
+    }
+
     const onToggleSelection = (val) => {
         setShowLocationSelect(val);
         setShowGuestsSelect(val);
         toggleSearchLabel(false);
-        console.log("Mouse leave");
     }
 
     return (
         <div className = "header">
             <div className = "brand">Wind BnB</div>
-            <form className = "search" onMouseEnter={(e) => toggleSearchLabel(true)} onMouseLeave={(e) => onToggleSelection(false)}>
+            <form 
+                className = "search" 
+                onMouseEnter={(e) => toggleSearchLabel(true)} 
+                onMouseLeave={(e) => onToggleSelection(false)}
+                onSubmit = {onSubmit}
+            >
+                
 
                 <FilterInSearchBar 
                     show = {showLocationSelect}

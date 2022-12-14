@@ -136,17 +136,6 @@
                                     border-radius: 5px;
                                 }
                             }
-
-                            input[type=number] {
-                                all: unset;
-                                display: flex;
-                                text-align: center;
-                                width: auto;
-                                &::-webkit-inner-spin-button,
-                                &::-webkit-outer-spin-button {
-                                    -webkit-appearance: none;
-                                }
-                            }
                         }
                     }
                 }
