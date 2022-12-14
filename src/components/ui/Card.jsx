@@ -1,7 +1,7 @@
 import {PropsType} from "react";
 import "./css/card_style.scss";
 
-export default function Card (props) {
+export default function Card(props) {
     return (
         <div className = "wind-card">
             <div className = "preview-image">
@@ -9,8 +9,8 @@ export default function Card (props) {
             </div>
             <div className = "title">
                 <span className = "name">{props.isSuperHost && <span className = "super-host">Super Host</span>}
-                {props.name || "Name"}</span>
-                <span className = "stars">{props.starsRate || 4.5}</span>
+                {props.name || "Whithout name"}</span>
+                <span className = "stars">{props.starsRate || 0.0}</span>
             </div>
             <div className = "description">
                 <p>

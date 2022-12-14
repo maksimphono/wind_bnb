@@ -1,10 +1,9 @@
-import Card from "./Card.jsx";
+import Card from "../../components/ui/Card.jsx";
 import {useMemo} from "react";
 import "./css/card_collection_style.scss";
 
 export default function(props) {
     const cards = useMemo(() => props.cards, []);
-
 
     return (
         <>
@@ -17,7 +16,6 @@ export default function(props) {
                 <Card name = "Hotel 5" description = "" isSuperHost starsRate = {5.6} />
                 <Card name = "Hotel 6" description = "" starsRate = {5.6} />
             </div>
-        </>
-        
+        </>       
     )
 }
