@@ -1,4 +1,5 @@
 import "./css/cardFullView.scss";
+import Counter from "../../components/ui/Counter.jsx";
 
 export default function() {
     return (
@@ -26,9 +27,24 @@ export default function() {
                     <span>4.4 stars</span>
                 </div>
                 <form className = "set__in-out__date">
-                    <input type="date" className = "checkin__date" />
-                    <input type="date" className = "checkout__date" />
-                    <div className = "adults__number__setting" style = {{background: "red"}}></div>
+                    <div className = "container">
+                        <input type="date" name = "checkin__date" />
+                        <div className = "label">
+                            <label htmlFor="checkin__date">Check In date</label>
+                            <span>12/04/22</span>
+                        </div>
+                    </div>
+                    <div className = "container">
+                        <input type="date" name = "checkout__date" />
+                        <div className = "label">
+                            <label htmlFor="checkout__date">Check Out date</label>
+                            <span>12/04/22</span>
+                        </div>
+                    </div>
+                    <div className = "guests__dropdown">
+                        <Counter />
+                        <Counter />
+                    </div>
                     <div className = "children__number__setting" style = {{background: "#ada"}}></div>
                 </form>
             </div>

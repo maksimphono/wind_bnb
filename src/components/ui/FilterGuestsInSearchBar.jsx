@@ -1,7 +1,6 @@
 import {useRef, useMemo, useEffect, useState} from "react";
 import React from "react";
 import $ from "jquery";
-import { toggleElem } from "./Haeder";
 import GuestCounter from "./Counter.jsx";
 
 import {adults_number_field_id, children_number_field_id} from "../../data/fields_html_ids.js";
@@ -32,7 +31,7 @@ export default function({adultsCounterRef, childrenCounterRef, ...props}) {
                 <span>{props.title}</span>
                 <span ref = {selectedItemRef}>{+adultsNumber + +childrenNumber} guests</span>
             </div>
-            <div 
+            <div
                 ref = {selectionDivRef} 
                 className = "selection"
                 style = {{opacity : "" + Number(props.show)}}

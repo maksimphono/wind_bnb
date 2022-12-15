@@ -97,31 +97,65 @@
             align-self: center;
             display: grid;
             grid-template: 1fr 1fr 1fr / 1fr 1fr;
-            gap: 2px;
+            gap: 1px;
             width: 85%;
             height: max-content;
             margin: 10%;
-            background: #666;
+            background: rgb(43, 43, 43);
             border-radius: inherit;
+            border: 1px solid rgb(43, 43, 43);
             overflow: hidden;
 
             & > * {
-                min-height: 60px;
+                min-height: 50px;
             }
-            input[type=date] {
-                display: flex;
-                border: none;
-                outline: none;
-                width: auto;
 
-                &::-webkit-datetime-edit {
-                    display: none;
-                }
-                &::-webkit-calendar-picker-indicator {
-                    display: block;
+            .container {
+                display: grid;
+                grid-template-areas: "item";
+                width: 100%;
+                height: 100%;
+                overflow: hidden;
+
+                input[type=date] {
+                    grid-area: item;
+                    display: flex;
                     opacity: 0;
-                    height: 100%;
+                    //margin-left: -50%;
                     width: 100%;
+                    height: 100%;
+                    border: none;
+                    outline: none;
+                    z-index: 1;
+
+                    &::-webkit-datetime-edit {
+                        display: none;
+                    }
+                    &::-webkit-calendar-picker-indicator {
+                        display: block;
+                        opacity: 0;
+                        height: 100%;
+                        width: 100%;
+                    }
+                }
+                .label {
+                    grid-area: item;
+                    display: flex;
+                    flex-flow: column wrap;
+                    justify-content: space-evenly;
+                    align-items: start;
+                    padding: 5% 5%;
+                    width: 100%;
+                    height: 100%;
+                    font-size: .7em;
+                    font-weight: 500;
+                    background: #fff;
+                    z-index: 0;
+
+                    span {
+                        font-weight: 300;
+                        font-size: 1.3em;
+                    }
                 }
             }
 

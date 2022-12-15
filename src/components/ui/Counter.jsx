@@ -1,4 +1,5 @@
 import React, {useReducer} from "react";
+import PropTypes from "prop-types";
 import $ from "jquery";
 
 const INCREACE = "INCREACE";
@@ -17,15 +18,15 @@ function counterReducer(state, action) {
     }
 }
 
-export default React.forwardRef(function (props, counterRef) {
-    const [counter, dispatch] = useReducer(counterReducer, props.initialValue);
+const Counter = React.forwardRef(function (props, counterRef) {
+    const [counter, dispatch] = useReducer(counterReducer, props.initialValue || 0);
 
     const handleValueChange = ({target}) => {
         dispatch({
             type : $(target).data("action"), 
-            setter : props.setter, 
-            max : props.max, 
-            min : props.min
+            setter : props.setter || (() => null), 
+            max : (props.max || 10), 
+            min : (props.min || 0)
         });
     }
     
@@ -42,7 +43,7 @@ export default React.forwardRef(function (props, counterRef) {
                 >
                     -
                 </button>
-                <span id = {props.id} ref = {counterRef} data-value = {counter}>{counter}</span>
+                <span id = {"" + props.id} ref = {counterRef} data-value = {counter}>{counter}</span>
                 <button 
                     type = "button"
                     className = "control__btn" 
@@ -52,7 +53,18 @@ export default React.forwardRef(function (props, counterRef) {
                     +
                 </button>
             </div>
-            
         </div>
     )
-})
+});
+
+Counter.propTypes = {
+    id: PropTypes.string,
+    title : PropTypes.string.isRequired,
+    subtitle : PropTypes.string.isRequired,
+    initialValue : PropTypes.number,
+    max: PropTypes.number,
+    min: PropTypes.number,
+    setter : PropTypes.func
+}
+
+export default Counter;
