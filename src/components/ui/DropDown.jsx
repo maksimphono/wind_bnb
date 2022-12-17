@@ -1,8 +1,7 @@
 import {useReducer, useRef, useState, useEffect, useCallback} from "react";
 import PropTypes from "prop-types";
 import $ from "jquery";
-
-import "./css/drowpdown.scss";
+import styles from "./css/drowpdown.module.scss"
 
 function toggleReducer(state, action) {
     action.setterCallback && action.setterCallback(action?.state || !state);
@@ -10,55 +9,62 @@ function toggleReducer(state, action) {
 }
 
 function DrowDown({children, ...props}) {
-    const [showSelection, dispatchSelection] = useReducer(toggleReducer, false);
-    const selectionRef = useRef();
-    const [selectionParams, setSelectionParams] = useState({});
-    const ddRef = useRef();
-
-    const onShowDropDown = useCallback(() => (console.log("onShow"), dispatchSelection({setterCallback : props.setterCallback, state : true})), [])
+    const [isOpen, setIsOpen] = useState(props.isOpen || false);
+    let togglerRef = useRef();
+    let selectionRef = useRef();
 
     useEffect(() => {
-        setSelectionParams({
-            "height" : "max-content",
-            "min-height" : "100%",
-            "opacity" : "1",
-            "z-index" : "0"
-        });
-        props.style.height && $(ddRef.current).find(".toggler__button").css("height", props.style.height);
+        $(document).on("click", handleBlur);
+        $(togglerRef).css("width", props.togglerStyle?.width || props.style?.width);
+
+        return () => {
+            $(document).off("click", handleBlur);
+        }
     }, []);
 
-    useEffect(() => {
-        $(selectionRef.current).animate(!showSelection && {"height": "0"}, 500,
-        () => $(selectionRef.current).css(showSelection ? selectionParams : {"height": "0", "min-height" : "0", "opacity": "0", "z-index": "-9"}));
-    }, [showSelection, props.show]);
-    
+    const handleBlur = (event) => {
+        const path = event.path || (event.composedPath && event.composedPath());
+        if (!path.includes(togglerRef) && !path.includes(selectionRef)) {
+            setIsOpen(false);
+        }
+
+        props.setterCallback && props.setterCallback(false);
+    }
+
+     const handleToggle = (event) => {
+        setIsOpen(v => {
+            props.setterCallback && props.setterCallback(!v);
+            return !v;
+        });
+     }
+
+     useEffect(() => {
+        if (props.isOpen && props.isOpen !== isOpen) {
+            setIsOpen(props.isOpen);
+        }
+     }, [props.isOpen, isOpen]);
+
     return (
-        <div 
-            className = "dropdown"
-            ref = {ddRef}
-            style = {props.style} 
-        >
-            <button
-                type = "button"
-                onClick = {() => dispatchSelection({setterCallback : props.setterCallback})}
-                className = "toggler__button"
-            >{props.label}</button>
-            <div 
-                className = "selection" 
-                ref = {selectionRef}
-                
-            >
-                {children}
+        <div style = {props.style || {}} className = {styles.dropdown__wrapper}>
+            <button style = {props.togglerStyle || {}} ref = {ref => (togglerRef = ref)} onClick = {handleToggle} type = "button" className = {styles.toggler}>{props.toggler}</button>
+            <div className={styles.secltion} style = {props.selectionStyle || {}}>
+                {isOpen && 
+                (<div style = {props.selectionStyle} className={styles.children} ref = {ref => (selectionRef = ref)}>
+                    {children}
+                </div>)
+                }
             </div>
         </div>
     );
 }
 
 DrowDown.propTypes = {
-
-    show : PropTypes.bool,
+    isOpen : PropTypes.bool,
     toggler : PropTypes.string.isRequired,
-    setterCallback : PropTypes.func
+    setterCallback : PropTypes.func,
+    style : PropTypes.object,
+    togglerStyle : PropTypes.object,
+    selectionStyle : PropTypes.object
 }
 
 export default DrowDown;

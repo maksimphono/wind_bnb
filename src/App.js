@@ -9,11 +9,9 @@ import Counter from './components/ui/Counter';
 function App() {
   return (
     <>
-      <DrowDown label = "DropD" style = {{"width": "100px", height: 200}}>
-        
-      <div style = {{display: "block", width: "200px", height: "70px", border: "1px solid red"}}><button>Button</button></div>
-        <div style = {{display: "block", width: "200px", height: "70px", border: "1px solid red"}}><button>Button</button></div>
-        <div style = {{display: "block", width: "200px", height: "80px"}}>Hello</div>
+      <DrowDown toggler = "Drop" isOpen = {false}>
+        <Counter title = "Adults" subtitle = "Age 13+" />
+        <Counter title = "Children" subtitle = "Age 2- 12" />
       </DrowDown>
     </>
   );

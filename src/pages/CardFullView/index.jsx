@@ -1,5 +1,6 @@
 import "./css/cardFullView.scss";
 import Counter from "../../components/ui/Counter.jsx";
+import DropDown from "../../components/ui/DropDown.jsx";
 
 export default function() {
     return (
@@ -41,10 +42,10 @@ export default function() {
                             <span>12/04/22</span>
                         </div>
                     </div>
-                    <div className = "guests__dropdown">
+                    <DropDown>
                         <Counter />
                         <Counter />
-                    </div>
+                    </DropDown>
                     <div className = "children__number__setting" style = {{background: "#ada"}}></div>
                 </form>
             </div>
