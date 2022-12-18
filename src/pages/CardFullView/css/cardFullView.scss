@@ -37,7 +37,6 @@
                 img:first-child {
                     min-width: 100%;
                     min-height: 200px !important;
-                    
                 }
                 img:not(img:first-child, img:last-child) {
                     display: none;
