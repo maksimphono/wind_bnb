@@ -9,10 +9,7 @@ import Counter from './components/ui/Counter';
 function App() {
   return (
     <>
-      <DrowDown toggler = "Drop" isOpen = {false}>
-        <Counter title = "Adults" subtitle = "Age 13+" />
-        <Counter title = "Children" subtitle = "Age 2- 12" />
-      </DrowDown>
+      <CardFullView />
     </>
   );
 }
@@ -21,7 +18,7 @@ export default App;
 
 /*
 <>
-    <CardFullView />
+    
       <Header />
       <CardCollection />
     </>

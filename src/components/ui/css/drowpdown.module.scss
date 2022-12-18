@@ -1,31 +1,33 @@
 .dropdown__wrapper {
-    display: inline-flex;
-    position: relative;
+    display: block;
     flex-direction: column;
     width: max-content;
+    background: #fff;
+    border: none;
+    box-sizing: border-box;
+    border-radius: none;
 
     button.toggler {
-        display: block;
+        display: flex;
         position: relative;
-        padding: 10px;
-        border: 1px solid #000;
+        border: inherit;
+        border-radius: inherit;
+        //padding: 5%;
         min-width: 10px;
         width: 100px;
         max-width: 100%;
-        border-radius: 5px;
-        background-color: #eee;
+        background-color: #fff;
         cursor: pointer;
     }
 
     .selection {
         position: relative;
-        
+        z-index: 9;
+
         & > .children {
             position: absolute;
-            left: 1px;
-            top: 8px;
-            width: 100px;
-            background: #fff;
+            width: 100%;
+            background: rgb(255, 255, 255);
             box-shadow: 0 0 5px #333;
         }
     }

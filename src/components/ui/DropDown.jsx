@@ -47,7 +47,7 @@ function DrowDown({children, ...props}) {
     return (
         <div style = {props.style || {}} className = {styles.dropdown__wrapper}>
             <button style = {props.togglerStyle || {}} ref = {ref => (togglerRef = ref)} onClick = {handleToggle} type = "button" className = {styles.toggler}>{props.toggler}</button>
-            <div className={styles.secltion} style = {props.selectionStyle || {}}>
+            <div className={styles.selection} style = {props.selectionStyle || {}}>
                 {isOpen && 
                 (<div style = {props.selectionStyle} className={styles.children} ref = {ref => (selectionRef = ref)}>
                     {children}
