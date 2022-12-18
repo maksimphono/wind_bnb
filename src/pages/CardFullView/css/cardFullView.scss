@@ -7,6 +7,7 @@
     height: max-content;
     padding: 2% 3%;
     background: #0000;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
 
     & > * {
         grid-column: 1 / span 3;
@@ -30,16 +31,42 @@
         grid-template: 1fr 1fr / 2fr 1fr 1fr;
         gap: 10px;
 
+        @media screen and (max-width : 800px) {
+            & {
+                grid-template: 1fr / 1fr;
+                img:first-child {
+                    min-width: 100%;
+                    min-height: 200px !important;
+                    
+                }
+                img:not(img:first-child, img:last-child) {
+                    display: none;
+                }
+            }
+            
+        }
+
         img {
             display: block;
             width: auto;
             height: auto;
             min-height: 100px;
+            border-radius: 5px;
             outline: 2px solid red;
+            object-fit: contain;
 
             &:first-child {
                 grid-column: 1 / 2;
                 grid-row: 1 / span 2;
+            }
+
+            &:last-child {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background: #fff;
+                box-shadow: 0 0 5px #555;
+                outline: none;
             }
         }
     }
@@ -50,12 +77,13 @@
         justify-content: space-between;
         align-items: start;
         width: 90%;
-        height: auto;
+        height: max-content;
         border-bottom: 2px solid #666;
 
         @media screen and (max-width : 800px) {
             & {
                 grid-column: 1 / span 3;
+                width: 100%;
             }
         }
 
@@ -116,6 +144,7 @@
             border-radius: inherit;
             border: 1px solid rgb(43, 43, 43);
             overflow: visible;
+
             @mixin font-padding-for-labels {
                 font-size: .7em;
                 font-weight: 500;

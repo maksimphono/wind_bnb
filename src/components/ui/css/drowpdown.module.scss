@@ -9,6 +9,8 @@
 
     button.toggler {
         display: flex;
+        justify-content: space-between;
+        align-items: center;
         position: relative;
         border: inherit;
         border-radius: inherit;
@@ -18,6 +20,13 @@
         max-width: 100%;
         background-color: #fff;
         cursor: pointer;
+
+        span {
+            margin-right: 5%;
+            transform: none;
+            transition: .5s;
+        }
+        
     }
 
     .selection {

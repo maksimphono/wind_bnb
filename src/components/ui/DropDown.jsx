@@ -32,8 +32,10 @@ function DrowDown({children, ...props}) {
     }
 
      const handleToggle = (event) => {
+        
         setIsOpen(v => {
             props.setterCallback && props.setterCallback(!v);
+            $(".arrow").css(v && {"transform" : "rotate(0deg)"} || {"transform" : "rotate(180deg)"});
             return !v;
         });
      }
@@ -42,17 +44,16 @@ function DrowDown({children, ...props}) {
         if (props.isOpen && props.isOpen !== isOpen) {
             setIsOpen(props.isOpen);
         }
+        
      }, [props.isOpen, isOpen]);
 
     return (
         <div style = {props.style || {}} className = {styles.dropdown__wrapper}>
-            <button style = {props.togglerStyle || {}} ref = {ref => (togglerRef = ref)} onClick = {handleToggle} type = "button" className = {styles.toggler}>{props.toggler}</button>
+            <button style = {props.togglerStyle || {}} ref = {ref => (togglerRef = ref)} onClick = {handleToggle} type = "button" className = {styles.toggler}>{props.toggler}<span className = "arrow">V</span></button>
             <div className={styles.selection} style = {props.selectionStyle || {}}>
-                {isOpen && 
-                (<div style = {props.selectionStyle} className={styles.children} ref = {ref => (selectionRef = ref)}>
+                <div style = {isOpen?{...props.selectionStyle}:{display: "none"}} className={styles.children} ref = {ref => (selectionRef = ref)}>
                     {children}
-                </div>)
-                }
+                </div>
             </div>
         </div>
     );
