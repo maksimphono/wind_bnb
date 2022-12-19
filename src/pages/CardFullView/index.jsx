@@ -3,17 +3,20 @@ import Counter from "../../components/ui/Counter.jsx";
 import DropDown from "../../components/ui/DropDown.jsx";
 import ImagesView from "./ImagesView.jsx";
 import {useState, useEffect, useCallback} from "react";
+import {useParams} from "react-router-dom";
 import $ from "jquery";
 
 export default function() {
     const [showImages, setShowImages] = useState(false);
     const onShowImages = useCallback(() => setShowImages(true));
+    const {id} = useParams();
 
     useEffect(() => {
         $(".images img").on("click", onShowImages);
         return () => {
             $(".images img").off("click", onShowImages);
         }
+        
     }, []);
 
     return (
@@ -33,7 +36,6 @@ export default function() {
                 <img src="https://th.bing.com/th/id/R.149a813e49860f6b6bde0872a869fedb?rik=DyHz0u5KYXdpFQ&pid=ImgRaw&r=0" alt="" />
                 <img src="https://th.bing.com/th/id/R.149a813e49860f6b6bde0872a869fedb?rik=DyHz0u5KYXdpFQ&pid=ImgRaw&r=0" alt="" />
             </div>
-            
             <div className = "owner__info">
                 <p className = "info">Entire house is owed by Lisa</p>
                 <img src="" alt="" className = "avatar" />

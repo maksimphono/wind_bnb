@@ -24,7 +24,7 @@ function DrowDown({children, ...props}) {
 
     const handleBlur = (event) => {
         const path = event.path || (event.composedPath && event.composedPath());
-        if (!path.includes(togglerRef) && !path.includes(selectionRef)) {
+        if (!path?.includes(togglerRef) && !path?.includes(selectionRef)) {
             setIsOpen(false);
         }
 

@@ -11,7 +11,7 @@ function App() {
       <Routes>
         <Route path = "/" element = {<Layout/>}>
           <Route index element = {<CardCollection/>} />
-          <Route path = "full" element = {<CardFullView/>} />
+          <Route path = "full/:id" element = {<CardFullView />} />
         </Route>
       </Routes>
     </BrowserRouter>
