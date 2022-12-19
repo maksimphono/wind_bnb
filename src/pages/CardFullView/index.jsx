@@ -1,9 +1,24 @@
 import "./css/cardFullView.scss";
 import Counter from "../../components/ui/Counter.jsx";
 import DropDown from "../../components/ui/DropDown.jsx";
+import ImagesView from "./ImagesView.jsx";
+import {useState, useEffect, useCallback} from "react";
+import $ from "jquery";
 
 export default function() {
+    const [showImages, setShowImages] = useState(false);
+    const onShowImages = useCallback(() => setShowImages(true));
+
+    useEffect(() => {
+        $(".images img").on("click", onShowImages);
+        return () => {
+            $(".images img").off("click", onShowImages);
+        }
+    }, []);
+
     return (
+        <>
+        <ImagesView show = {showImages} handleClose = {() => setShowImages(false)}/>
         <div className = "card__full__view">
             <div className = "card__title">
                 <h2>Seaview and Thai temple view pool villa</h2>
@@ -18,6 +33,7 @@ export default function() {
                 <img src="" alt="" />
                 <img src="" alt="" />
             </div>
+            
             <div className = "owner__info">
                 <p className = "info">Entire house is owed by Lisa</p>
                 <img src="" alt="" className = "avatar" />
@@ -55,5 +71,6 @@ export default function() {
                 <button type = "submit">Reserve</button>
             </form>
         </div>
+        </>
     )
 }
