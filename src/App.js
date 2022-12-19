@@ -1,12 +1,9 @@
 import logo from './logo.svg';
 import './assets/global.css';
 import CardCollection from "./pages/CardsCollection/CardCollection.jsx";
-import Header from "./components/ui/Haeder.jsx";
 import CardFullView from "./pages/CardFullView/index.jsx";
-import DrowDown from './components/ui/DropDown';
-import Counter from './components/ui/Counter';
-import Layout from "./Layout.jsx";
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Layout from './Layout';
 
 function App() {
   return (

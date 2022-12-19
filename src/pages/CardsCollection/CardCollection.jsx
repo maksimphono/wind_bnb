@@ -9,6 +9,8 @@ export default function(props) {
         <>
             <h1 className = "stay-location">Stay in Finland</h1>
             <div className = "card-collection">
+                <a href = "/full"><Card name = "Hotel 1" description = "Desc 1" isSuperHost starsRate = {5.6} />
+                </a>
                 <Card name = "Hotel 1" description = "Desc 1" isSuperHost starsRate = {5.6} />
                 <Card name = "Hotel 2" description = "" isSuperHost starsRate = {3.6} />
                 <Card name = "Hotel 3" description = "Desc 2" starsRate = {2.6} />

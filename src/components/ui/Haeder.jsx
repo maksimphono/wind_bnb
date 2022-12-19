@@ -1,4 +1,5 @@
 import { useRef, useReducer, useState } from "react";
+import {Link} from "react-router-dom";
 import "./css/header.scss";
 //import searchIcon from "../../assets/icons/search__icon.svg";
 import logo from "../../logo.svg"
@@ -40,7 +41,7 @@ export default function (props) {
 
     return (
         <div className = "header">
-            <div className = "brand">Wind BnB</div>
+            <Link to = "/" className = "brand">Wind BnB</Link>
             <form 
                 className = "search" 
                 onMouseEnter={(e) => toggleSearchLabel(true)} 
