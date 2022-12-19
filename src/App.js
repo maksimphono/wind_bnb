@@ -5,13 +5,19 @@ import Header from "./components/ui/Haeder.jsx";
 import CardFullView from "./pages/CardFullView/index.jsx";
 import DrowDown from './components/ui/DropDown';
 import Counter from './components/ui/Counter';
+import Layout from "./Layout.jsx";
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 function App() {
   return (
-    <>
-      <Header />
-      <CardCollection />
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route path = "/" element = {<Layout/>}>
+          <Route index element = {<CardCollection/>} />
+          <Route path = "full" element = {<CardFullView/>} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
 
