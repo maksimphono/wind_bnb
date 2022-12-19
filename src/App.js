@@ -9,7 +9,8 @@ import Counter from './components/ui/Counter';
 function App() {
   return (
     <>
-      <CardFullView />
+      <Header />
+      <CardCollection />
     </>
   );
 }
