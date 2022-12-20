@@ -1,10 +1,21 @@
 import Card from "../../components/ui/Card.jsx";
-import {useMemo} from "react";
+import {useMemo, useEffect} from "react";
 import {Link} from "react-router-dom";
 import "./css/card_collection_style.scss";
+import $ from "jquery"
 
 export default function(props) {
     const cards = useMemo(() => props.cards, []);
+
+    useEffect(() => {
+        $.ajax({
+            url : "http://127.0.0.1:8000/api/",
+            dataType : "json",
+            success : function(data, status, XHR){
+                console.table(data);
+            }
+        })
+    }, []);
 
     return (
         <>
