@@ -7,6 +7,10 @@ class WindBnBCardSerializer(serializers.ModelSerializer):
         fields = (
             "id",
             "title",
-            "desc"
+            "description",
+            "owner",
+            "freewifi",
+            "nocancelationfee",
+            "securitysystems"
         )
         model = WindBnBCardModel
