@@ -5,16 +5,20 @@ import "./css/card_collection_style.scss";
 import $ from "jquery"
 
 export default function(props) {
-    const cards = useMemo(() => props.cards, []);
-
-    useEffect(() => {
+    const cards = useMemo(() => {
         $.ajax({
             url : "http://127.0.0.1:8000/api/",
             dataType : "json",
             success : function(data, status, XHR){
-                console.table(data);
+                if (typeof(data) === "object")
+                    return [...data];
+            },
+            error : (data, status) => {
+                console.log("Error when fetching data : ", status);
+                console.log(data);
+                return status;
             }
-        })
+        });
     }, []);
 
     return (
