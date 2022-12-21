@@ -2,21 +2,16 @@ import Card from "../../components/ui/Card.jsx";
 import {useMemo, useEffect} from "react";
 import {Link} from "react-router-dom";
 import "./css/card_collection_style.scss";
+import useFetch from "../../hooks/useFetch.jsx";
 import $ from "jquery"
 
 export default function(props) {
     const cards = useMemo(() => props.cards, []);
+    const data = useFetch("http://127.0.0.1:8000/api");
 
     useEffect(() => {
-        $.ajax({
-            url : "http://127.0.0.1:8000/api/",
-            dataType : "json",
-            success : function(data, status, XHR){
-                console.table(data);
-            }
-        })
-        // hello
-    }, []);
+        console.log(data);
+    }, [data]);
 
     return (
         <>
