@@ -3,28 +3,33 @@ import Counter from "../../components/ui/Counter.jsx";
 import DropDown from "../../components/ui/DropDown.jsx";
 import ImagesView from "./ImagesView.jsx";
 import {useState, useEffect, useCallback} from "react";
+import useFetch from "../../hooks/useFetch.jsx";
 import {useParams} from "react-router-dom";
 import $ from "jquery";
+import LoadingComponent from "../../components/ui/LoadingComponent";
 
 export default function() {
     const [showImages, setShowImages] = useState(false);
     const onShowImages = useCallback(() => setShowImages(true));
     const {id} = useParams();
+    const {data, isLoading, status, error} = useFetch("http://127.0.0.1:8000/api/" + id);
 
     useEffect(() => {
         $(".images img").on("click", onShowImages);
         return () => {
             $(".images img").off("click", onShowImages);
         }
-        
     }, []);
 
+    if (isLoading) {
+        return <LoadingComponent />
+    }
     return (
         <>
         <ImagesView show = {showImages} handleClose = {() => setShowImages(false)}/>
         <div className = "card__full__view">
             <div className = "card__title">
-                <h2>Seaview and Thai temple view pool villa</h2>
+                <h2>{data.title}</h2>
                 <span className = "star__number">4.4 stars</span>
                 <span className = "superhost">Superhost</span>
                 <span className = "adress">Ko Samui, Chang Wat Surat Thani, Thailand</span>
@@ -75,4 +80,7 @@ export default function() {
         </div>
         </>
     )
+    /*
+    */
+    
 }
