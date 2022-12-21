@@ -1,7 +1,7 @@
 .dropdown__wrapper {
     display: block;
     flex-direction: column;
-    width: max-content;
+    width: auto;
     background: #fff;
     border: none;
     box-sizing: border-box;
@@ -16,7 +16,7 @@
         border-radius: inherit;
         //padding: 5%;
         min-width: 10px;
-        width: 100px;
+        width: 100%;
         max-width: 100%;
         background-color: #fff;
         cursor: pointer;

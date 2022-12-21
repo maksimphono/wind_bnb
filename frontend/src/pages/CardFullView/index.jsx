@@ -10,6 +10,7 @@ import LoadingComponent from "../../components/ui/LoadingComponent";
 
 export default function() {
     const [showImages, setShowImages] = useState(false);
+    const [isOpenDrop, setIsOpenDrop] = useState(false);
     const onShowImages = useCallback(() => setShowImages(true));
     const {id} = useParams();
     const {data, isLoading, status, error} = useFetch("http://127.0.0.1:8000/api/" + id);
@@ -21,9 +22,6 @@ export default function() {
         }
     }, []);
 
-    if (isLoading) {
-        return <LoadingComponent />
-    }
     return (
         <>
         <ImagesView show = {showImages} handleClose = {() => setShowImages(false)}/>
@@ -66,7 +64,7 @@ export default function() {
                         </div>
                     </div>
                     <div className = "guests__settings__container">
-                        <DropDown toggler = "Guests" isOpen = {false} style = {{width : "100%", height: "100%"}} togglerStyle = {{height: "100%"}}>
+                        <DropDown toggler = "Guests" isOpen = {isOpenDrop} setterCallback = {setIsOpenDrop} style = {{width : "100%", height: "100%"}} togglerStyle = {{height: "100%"}}>
                             <Counter title = "Adults" subtitle = "Age 13+" initialValue = {1} max = {10} min = {0}/>
                             <Counter title = "Children" subtitle = "Age 2 - 12"  max = {10} min = {0}/>
                             <Counter title = "Infants" subtitle = "Age 0 - 2"  max = {2} min = {0}/>

@@ -82,6 +82,18 @@
         }
     }
 
+    .description {
+        display: block;
+        width: 100%;
+        height: max-content;
+        max-height: 500px;
+        word-wrap: break-word;
+        border: 1px solid #444;
+        border-radius: 5px;
+        padding: 3%;
+        overflow: auto;
+    }
+
     .owner__info {
         grid-column: 1 / span 2;
         display: flex;
