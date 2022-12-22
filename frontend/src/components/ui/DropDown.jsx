@@ -23,10 +23,11 @@ function DrowDown({children, ...props}) {
     }, []);
 
     const handleBlur = (event) => {
-        //const path = event.path || (event.composedPath && event.composedPath());
-        console.log(" Event : ", event.target); 
-        console.log("ref", togglerRef);
-        if ($(event.target) != $(togglerRef) && $(event.target) != selectionRef) {
+        console.log(" Event : ", event.target);
+        console.log("ref", togglerRef.current);
+        console.log("select: ", Array.from($(event.target).parents()).includes(selectionRef.current));
+        
+        if (event.target != togglerRef.current && !Array.from($(event.target).parents()).includes(selectionRef.current)) {
             setIsOpen(false);
         }
 
@@ -34,22 +35,17 @@ function DrowDown({children, ...props}) {
     }
 
      const handleToggle = (event) => {
-        
-        setIsOpen(v => {
-            //props.setterCallback && props.setterCallback(!v);
-            $(".arrow").css(v && {"transform" : "rotate(0deg)"} || {"transform" : "rotate(180deg)"});
-            //console.log("DD", !v);
-            return !v;
-        });
+        setIsOpen(v => !v);
      }
-/*
+
      useEffect(() => {
-        if (props.isOpen && props.isOpen !== isOpen) {
-            setIsOpen(props.isOpen);
-        }
-        
-     }, [props.isOpen, isOpen]);
-*/
+        setIsOpen(props.isOpen);
+     }, [props.isOpen]);
+
+     useEffect(() => {
+        $(".arrow").css(!isOpen && {"transform" : "rotate(0deg)"} || {"transform" : "rotate(180deg)"});
+     }, [isOpen])
+
     return (
         <div style = {props.style || {}} className = {styles.dropdown__wrapper}>
             <button style = {props.togglerStyle || {}} ref = {togglerRef} onClick = {handleToggle} type = "button" className = {styles.toggler}>{props.toggler}<span className = "arrow">V</span></button>
