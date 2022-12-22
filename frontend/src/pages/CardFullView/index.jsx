@@ -28,7 +28,7 @@ export default function() {
         <div className = "card__full__view">
             <div className = "card__title">
                 <h2>{data.title}</h2>
-                <span className = "star__number">4.4 stars</span>
+                <span className = "star__number">{data.starsRate} stars</span>
                 <span className = "superhost">Superhost</span>
                 <span className = "adress">Ko Samui, Chang Wat Surat Thani, Thailand</span>
             </div>
