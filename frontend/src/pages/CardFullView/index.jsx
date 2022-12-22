@@ -39,6 +39,9 @@ export default function() {
                 <img src="https://th.bing.com/th/id/R.149a813e49860f6b6bde0872a869fedb?rik=DyHz0u5KYXdpFQ&pid=ImgRaw&r=0" alt="" />
                 <img src="https://th.bing.com/th/id/R.149a813e49860f6b6bde0872a869fedb?rik=DyHz0u5KYXdpFQ&pid=ImgRaw&r=0" alt="" />
             </div>
+            <p className="description">
+                {data.description}
+            </p>
             <div className = "owner__info">
                 <p className = "info">Entire house is owed by Lisa</p>
                 <img src="" alt="" className = "avatar" />
