@@ -43,27 +43,27 @@ export default function() {
                 {data.description}
             </p>
             <div className = "owner__info">
-                <p className = "info">Entire house is owed by Lisa</p>
+                <p className = "info">Entire house is owed by {data.owner}</p>
                 <img src="" alt="" className = "avatar" />
             </div>
             <form className = "reserve__card">
                 <div className = "reserve__card__title">
-                    <span>$4,998 <span>/ night</span></span>
-                    <span>4.4 stars</span>
+                    <span>{data.priceForNight} <span>/ night</span></span>
+                    <span>{data.starsRate} stars</span>
                 </div>
                 <form className = "set__in-out__date">
                     <div className = "container">
                         <input type="date" name = "checkin__date" />
                         <div className = "label">
                             <label htmlFor="checkin__date">Check In date</label>
-                            <span>12/04/22</span>
+                            <span name = "checkin__date">12/04/22</span>
                         </div>
                     </div>
                     <div className = "container">
                         <input type="date" name = "checkout__date" />
                         <div className = "label">
                             <label htmlFor="checkout__date">Check Out date</label>
-                            <span>12/04/22</span>
+                            <span name = "checkout__date">12/04/22</span>
                         </div>
                     </div>
                     <div className = "guests__settings__container">
