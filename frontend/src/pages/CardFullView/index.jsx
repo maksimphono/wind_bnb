@@ -7,6 +7,7 @@ import useFetch from "../../hooks/useFetch.jsx";
 import {useParams} from "react-router-dom";
 import $ from "jquery";
 import LoadingComponent from "../../components/ui/LoadingComponent";
+import DateInput from "../../components/ui/DateInput";
 
 export default function() {
     const [showImages, setShowImages] = useState(false);
@@ -52,13 +53,7 @@ export default function() {
                     <span>{data.starsRate} stars</span>
                 </div>
                 <form className = "set__in-out__date">
-                    <div className = "container">
-                        <input type="date" name = "checkin__date" />
-                        <div className = "label">
-                            <label htmlFor="checkin__date">Check In date</label>
-                            <span name = "checkin__date">12/04/22</span>
-                        </div>
-                    </div>
+                    <DateInput initialValue={new Date()} label = "Check in date" classes={{wrapper : "wrapper", label : "label"}}/>
                     <div className = "container">
                         <input type="date" name = "checkout__date" />
                         <div className = "label">
