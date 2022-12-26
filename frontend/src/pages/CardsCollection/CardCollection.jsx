@@ -23,7 +23,13 @@ export default function(props) {
             <div className = "card-collection">
                 {data.map(item => 
                     <Link key = {item.id} to = {"/full/" + item.id}>
-                        <Card name = {item.title} description = {item.description} isSuperHost starsRate = {5.0} />
+                        <Card 
+                            name = {item.title} 
+                            description = {item.description} 
+                            isSuperHost 
+                            starsRate = {5.0}
+                            preview_image = {item.preview_image}
+                         />
                     </Link>
                 )}
             </div>
