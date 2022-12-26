@@ -22,3 +22,6 @@ class WindBnBCardModel(models.Model):
     def __str__(self):
         return self.title
 
+class Image(models.Model) :
+    card = models.ForeignKey(WindBnBCardModel, on_delete=models.CASCADE)
+    image = models.ImageField(upload_to="pictures", default = "media/pictures/default_house.png")

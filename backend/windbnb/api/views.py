@@ -1,8 +1,8 @@
 from django.shortcuts import render
 from rest_framework import generics
 
-from .models import WindBnBCardModel
-from .serializers import WindBnBCardSerializer
+from .models import WindBnBCardModel, Image
+from .serializers import WindBnBCardSerializer, ImageSerializer
 
 # Create your views here.
 
@@ -13,3 +13,8 @@ class CardsCollection(generics.ListCreateAPIView):
 class WindBnBCard(generics.RetrieveUpdateDestroyAPIView):
     queryset = WindBnBCardModel.objects.all()
     serializer_class = WindBnBCardSerializer
+
+class ImageCollection(generics.ListCreateAPIView):
+    def get_queryset(self):
+        return Image.objects.filter(card=self.kwargs["img_id"])
+    serializer_class = ImageSerializer
