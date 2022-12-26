@@ -54,13 +54,7 @@ export default function() {
                 </div>
                 <form className = "set__in-out__date">
                     <DateInput initialValue={new Date()} label = "Check in date" classes={{wrapper : "wrapper", label : "label"}}/>
-                    <div className = "container">
-                        <input type="date" name = "checkout__date" />
-                        <div className = "label">
-                            <label htmlFor="checkout__date">Check Out date</label>
-                            <span name = "checkout__date">12/04/22</span>
-                        </div>
-                    </div>
+                    <DateInput initialValue={new Date()} label = "Check out date" classes={{wrapper : "wrapper", label : "label"}}/>
                     <div className = "guests__settings__container">
                         <DropDown toggler = "Guests" isOpen = {isOpenDrop} setterCallback = {setIsOpenDrop} style = {{width : "100%", height: "100%"}} togglerStyle = {{height: "100%"}}>
                             <Counter title = "Adults" subtitle = "Age 13+" initialValue = {1} max = {10} min = {0}/>

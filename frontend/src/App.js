@@ -8,14 +8,7 @@ import DateInput from './components/ui/DateInput';
 
 function App() {
   return (
-    <DateInput initialValue = {new Date("12.03.22")} label = "Current date" />
-  );
-}
-
-export default App;
-
-/*
-<BrowserRouter>
+    <BrowserRouter>
       <Routes>
         <Route path = "/" element = {<Layout/>}>
           <Route index element = {<CardCollection/>} />
@@ -23,4 +16,12 @@ export default App;
         </Route>
       </Routes>
     </BrowserRouter>
+  );
+}
+
+export default App;
+
+/*
+<DateInput initialValue = {new Date("12.03.22")} label = "Current date" />
+
 */
