@@ -15,17 +15,22 @@ export default function() {
     const onShowImages = useCallback(() => setShowImages(true));
     const {id} = useParams();
     const {data, isLoading, status, error} = useFetch("http://127.0.0.1:8000/api/" + id);
+    const {data : dataImages, isLoading : imagesIsLoading, status : imagesStatus, error : imagesError} = useFetch("http://127.0.0.1:8000/api/image/" + id)
 
     useEffect(() => {
         $(".images img").on("click", onShowImages);
         return () => {
             $(".images img").off("click", onShowImages);
         }
-    }, []);
+    }, [dataImages]);
+
+    if (isLoading || imagesIsLoading) {
+        return <LoadingComponent />
+    }
 
     return (
         <>
-        <ImagesView show = {showImages} handleClose = {() => setShowImages(false)}/>
+        <ImagesView show = {showImages} images = {dataImages} handleClose = {() => setShowImages(false)}/>
         <div className = "card__full__view">
             <div className = "card__title">
                 <h2>{data.title}</h2>
@@ -34,11 +39,9 @@ export default function() {
                 <span className = "adress">Ko Samui, Chang Wat Surat Thani, Thailand</span>
             </div>
             <div className = "images">
-                <img src="https://th.bing.com/th/id/R.149a813e49860f6b6bde0872a869fedb?rik=DyHz0u5KYXdpFQ&pid=ImgRaw&r=0" alt="" />
-                <img src="https://th.bing.com/th/id/R.149a813e49860f6b6bde0872a869fedb?rik=DyHz0u5KYXdpFQ&pid=ImgRaw&r=0" alt="" />
-                <img src="https://th.bing.com/th/id/OIP.co2IySTzP1YwwIaVwGgrigHaE8?pid=ImgDet&w=800&h=534&rs=1" alt="" />
-                <img src="https://th.bing.com/th/id/R.149a813e49860f6b6bde0872a869fedb?rik=DyHz0u5KYXdpFQ&pid=ImgRaw&r=0" alt="" />
-                <img src="https://th.bing.com/th/id/R.149a813e49860f6b6bde0872a869fedb?rik=DyHz0u5KYXdpFQ&pid=ImgRaw&r=0" alt="" />
+                {dataImages.map(item => 
+                    <img key = {item.card} src={item.image} alt="" />
+                )}
             </div>
             <p className="description">
                 {data.description}
