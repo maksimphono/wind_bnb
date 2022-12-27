@@ -1,0 +1,51 @@
+.images__view {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: flex-end;
+    gap: 5px;
+    width: 80vw;
+    height: 95vh;
+    background: #eee;
+    padding: 10px;
+    border-radius: 10px;
+    z-index: 10;
+    box-shadow: 0 0 5px #444;
+    
+    @media screen and (max-width : 800px) {
+        width: 90vw;
+    }
+
+    .images {
+        overflow-y: auto;
+        border-radius: inherit;
+
+        img {
+            display: block;
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            border-radius: inherit;
+            box-shadow: 0 0 5px #444;
+        }
+    }
+
+    .close__button {
+        display: block;
+        width: 30px;
+        min-height: 30px;
+        background: rgb(255, 255, 255);
+        border: 2px solid rgb(39, 39, 39);
+        border-radius: inherit;
+
+        &:hover {
+            background: rgb(39, 39, 39);
+            color: #fff;
+        }
+    }
+    
+}

@@ -1,0 +1,216 @@
+@import "/src/assets/settings.scss";
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: max-content;
+    margin-bottom: 1rem;
+    padding: 32px 0;
+
+    @media screen and (max-width: $phone_screen_width) {
+        & {
+            flex-direction: column;
+            gap: $gap-between-cards;
+        }
+    }
+
+    .brand {
+        all: unset;
+        width: max-content;
+        min-width: 155px;
+        height: max-content;
+        min-height: 50px;
+        margin-right: 1rem;
+        cursor: pointer;
+        background-image: url("../../../assets/icons/WindBnBLogo.png");
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+
+    form.search {
+        $form-search-width: 297px;
+        display: flex;
+        justify-content: space-between;
+        width: $search-bar-width;
+        height: $search-bar-height;
+        box-shadow: 0 1px 6px #000a;
+        gap: 0;
+        border-radius: $search-bar-border-radius;
+        transition: .5s;
+
+        &:hover {
+            width: 100%;
+        }
+        
+        .search-bar {
+            all: unset;
+            flex-grow: 1;
+            border: 2px solid#0000;
+            border-radius: $search-bar-border-radius;
+            display: block;
+            width: auto;
+            max-width: 35%;
+            height: 95%;
+            background: #fff4;
+            font-size: 100%;
+            overflow-y: visible;
+            cursor: pointer;
+            
+            .summary {
+                all: unset;
+                display: flex;
+                flex-direction: column;
+                width: 100%;
+                max-width: 100%;
+                height: 75%;
+                padding: 7px 10%;
+                overflow: hidden;
+
+                span {
+                    word-wrap: nowrap;
+                }
+                
+                span:first-child {
+                    font-weight: 600;
+                }
+            }
+
+            .selection {
+                all: unset;
+                position: relative;
+                opacity: 0;
+                top: 2%;
+                display: flex;
+                width: 100%;
+                height: auto;
+                background: rgb(228, 228, 228);
+                transition: .5s;
+                border-radius: 0 0 $search-bar-border-radius $search-bar-border-radius;
+                overflow: hidden;
+
+                ul.selection {
+                    all: unset;
+                    display: flex;
+                    justify-content: center;
+                    width: 100%;
+                    height: 0;
+                    flex-direction: column;
+                    overflow: hidden;
+                    border-radius: inherit;
+                    background: linear-gradient(rgb(244, 244, 244),  rgb(228, 228, 228));
+
+                    li {
+                        all: unset;
+                        display: flex;    
+                        align-items: center;
+                        max-width: 90%;
+                        height: auto;
+                        font-size: 1.2rem;
+                        padding: 3% 5%;
+                        border-bottom: 2px solid #333;
+                        
+                        &::after {
+                            content: '';
+                            position: absolute;
+                            top: 50%;
+                            display: none;
+                            background: rgb(106, 106, 106);
+                            width: 90%;
+                            height: 2px;
+                            z-index: 2;
+                        }
+                        
+                        &:last-child {
+                            border-radius: inherit;
+                            border-bottom: none;
+                        }
+
+                        .guests__counter {
+                            display: flex;
+                            flex-direction: column;
+                            gap: 5px;
+
+                            .title {
+                                font-weight: 600;
+                                span {
+                                    display: flex;
+                                    align-items: center;
+                                }
+                            }
+
+                            .subtitle {
+                                color:rgb(106, 106, 106, .7);
+                                font-size: .8em;
+                            }
+
+                            .counter__wrapper {
+                                display: flex;
+                                justify-content: space-between;
+                                width: 100px;
+
+                                button[type=button] {
+                                    all: unset;
+                                    display: flex;
+                                    justify-content: center;
+                                    align-items: center;
+                                    aspect-ratio: 1 / 1;
+                                    height: 20px;
+                                    font-size: 100%;
+                                    background: #fff;
+                                    border: 2px solid #000;
+                                    border-radius: 5px;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            &:focus, &:hover {
+                border-color:#000;
+            }
+            &:focus {
+                .select__location {
+                    display: block;
+                }
+            }
+
+            
+        }
+
+        .search-btn-wrapper {
+            flex-grow: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            width: auto;
+            border: none;
+            border-radius: inherit;
+            background: #0000;
+            cursor: pointer;
+            
+            button.search-btn {
+                all: inherit;
+                display: inline-flex;
+                justify-self: start;
+                width: auto;
+                aspect-ratio: 1 / 1;
+                max-width: $search-btn-max-width;
+                background:#EB5757;
+
+                span.search__label {
+                    display: none;
+                }
+
+                &:hover {
+                    background:#EB575790;
+                    
+                }
+            }
+        }
+
+    }
+}

@@ -1,0 +1,43 @@
+.dropdown__wrapper {
+    display: block;
+    flex-direction: column;
+    width: auto;
+    background: #fff;
+    border: none;
+    box-sizing: border-box;
+    border-radius: none;
+
+    button.toggler {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: relative;
+        border: inherit;
+        border-radius: inherit;
+        //padding: 5%;
+        min-width: 10px;
+        width: 100%;
+        max-width: 100%;
+        background-color: #fff;
+        cursor: pointer;
+
+        span {
+            margin-right: 5%;
+            transform: none;
+            transition: .5s;
+        }
+        
+    }
+
+    .selection {
+        position: relative;
+        z-index: 9;
+
+        & > .children {
+            position: absolute;
+            width: 100%;
+            background: rgb(255, 255, 255);
+            box-shadow: 0 0 5px #333;
+        }
+    }
+}
