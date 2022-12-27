@@ -10,7 +10,7 @@ export default function Card(props) {
             <div className = "title">
                 <span className = "name">{props.isSuperHost && <span className = "super-host">Super Host</span>}
                 {props.name || "Whithout name"}</span>
-                <span className = "stars">{props.starsRate || 0.0}</span>
+                <span className = "stars"><i className="material-icons" style = {{color : "#f77"}}>star</i>{props.starsRate || 0.0}</span>
             </div>
             <div className = "description">
                 <p>

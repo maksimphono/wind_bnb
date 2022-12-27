@@ -40,7 +40,7 @@ export default function({adultsCounterRef, childrenCounterRef, ...props}) {
                     <li>
                         <GuestCounter
                             id = {adults_number_field_id}
-                            title = "Adults" 
+                            title = {<span>Adults<i className="material-icons" style = {{color : "#000"}}>person</i></span>}
                             subtitle = "Ages 13 or above" 
                             initialValue = {1}
                             max = {8}
@@ -52,7 +52,7 @@ export default function({adultsCounterRef, childrenCounterRef, ...props}) {
                     <li>
                         <GuestCounter 
                             id = {children_number_field_id}
-                            title = "Children" 
+                            title = {<span>Children<i className="material-icons" style = {{color : "#000"}}>child_care</i></span>}
                             subtitle = "Ages 2 - 12" 
                             initialValue = {0}
                             max = {8}

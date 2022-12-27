@@ -48,7 +48,18 @@ function DrowDown({children, ...props}) {
 
     return (
         <div style = {props.style || {}} className = {styles.dropdown__wrapper}>
-            <button style = {props.togglerStyle || {}} ref = {togglerRef} onClick = {handleToggle} type = "button" className = {styles.toggler}>{props.toggler}<span className = "arrow">V</span></button>
+            <button 
+                style = {props.togglerStyle || {}} 
+                ref = {togglerRef} 
+                onClick = {handleToggle} 
+                type = "button" 
+                className = {styles.toggler}
+            >
+                {props.toggler}
+                <span className = "arrow">
+                    <i className = "material-icons">arrow_drop_down</i>
+                </span>
+            </button>
             <div className={styles.selection} style = {props.selectionStyle || {}}>
                 <div style = {isOpen?{...props.selectionStyle}:{display: "none"}} className={styles.children} ref = {selectionRef}>
                     {children}
