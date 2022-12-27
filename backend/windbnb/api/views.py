@@ -7,7 +7,8 @@ from .serializers import WindBnBCardSerializer, ImageSerializer
 # Create your views here.
 
 class CardsCollection(generics.ListCreateAPIView):
-    queryset = WindBnBCardModel.objects.all()
+    def get_queryset(self):
+        return WindBnBCardModel.objects.all()
     serializer_class = WindBnBCardSerializer
 
 class WindBnBCard(generics.RetrieveUpdateDestroyAPIView):
