@@ -41,7 +41,7 @@ export default function (props) {
 
     return (
         <div className = "header">
-            <Link to = "/" className = "brand">Wind BnB</Link>
+            <Link to = "/" className = "brand"></Link>
             <form 
                 className = "search" 
                 onMouseEnter={(e) => toggleSearchLabel(true)} 
