@@ -26,6 +26,14 @@
             height: 2em;
         }
 
+        .star__number {
+            display: flex;
+            align-items: center;
+            i {
+                color: #f77;
+            }
+        }
+
         .superhost {
             display: flex;
             justify-content: center;
@@ -258,7 +266,9 @@
                         "title buttons"
                         "subtitle buttons"
                     ;
+                    gap: auto;
                     padding: 15px;
+                    padding-right: 5px;
                     height: max-content;
                     overflow: hidden;
 
@@ -266,6 +276,10 @@
                     .subtitle {
                         max-width: 100%;
                         width: max-content;
+                        span {
+                            display: flex;
+                            justify-content: center;
+                        }
                     }
 
                     .title {

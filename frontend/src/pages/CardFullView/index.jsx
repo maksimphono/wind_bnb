@@ -34,7 +34,7 @@ export default function() {
         <div className = "card__full__view">
             <div className = "card__title">
                 <h2>{data.title}</h2>
-                <span className = "star__number">{data.starsRate} stars</span>
+                <span className = "star__number"><i className="material-icons">star</i>{data.starsRate} stars</span>
                 <span className = "superhost">Superhost</span>
                 <span className = "adress">Ko Samui, Chang Wat Surat Thani, Thailand</span>
             </div>
@@ -53,17 +53,34 @@ export default function() {
             <form className = "reserve__card">
                 <div className = "reserve__card__title">
                     <span>{data.priceForNight} <span>/ night</span></span>
-                    <span>{data.starsRate} stars</span>
+                    <span style = {{display: "flex", alignItems: "center"}}><i className="material-icons" style = {{color : "#f77"}}>star</i>{data.starsRate} stars</span>
                 </div>
                 <form className = "set__in-out__date">
                     <DateInput initialValue={new Date()} label = "Check in date" classes={{wrapper : "wrapper", label : "label"}}/>
                     <DateInput initialValue={new Date()} label = "Check out date" classes={{wrapper : "wrapper", label : "label"}}/>
                     <div className = "guests__settings__container">
                         <DropDown toggler = "Guests" isOpen = {isOpenDrop} setterCallback = {setIsOpenDrop} style = {{width : "100%", height: "100%"}} togglerStyle = {{height: "100%"}}>
-                            <Counter title = "Adults" subtitle = "Age 13+" initialValue = {1} max = {10} min = {0}/>
-                            <Counter title = "Children" subtitle = "Age 2 - 12"  max = {10} min = {0}/>
-                            <Counter title = "Infants" subtitle = "Age 0 - 2"  max = {2} min = {0}/>
-                            <Counter title = "Pets" subtitle = "Animals"  max = {4} min = {0}/>
+                            <Counter 
+                                title = {<span>Adults<i className="material-icons">person</i></span>}
+                                subtitle = "Age 13+" 
+                                initialValue = {1} 
+                                max = {10} 
+                                min = {0}/>
+                            <Counter 
+                                title = {<span>Children<i className="material-icons">child_care</i></span>} 
+                                subtitle = "Age 2 - 12" 
+                                max = {10} 
+                                min = {0}/>
+                            <Counter 
+                                title = {<span>Infants<i className="material-icons">child_friendly</i></span>}
+                                subtitle = "Age 0 - 2" 
+                                max = {2} 
+                                min = {0}/>
+                            <Counter 
+                                title =  {<span>Pets<i className="material-icons">cruelty_free</i></span>}
+                                subtitle = "Animals"  
+                                max = {4} 
+                                min = {0}/>
                         </DropDown>
                     </div>
                     

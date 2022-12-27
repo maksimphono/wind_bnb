@@ -27,7 +27,7 @@ export default function(props) {
                             name = {item.title} 
                             description = {item.description} 
                             isSuperHost 
-                            starsRate = {5.0}
+                            starsRate = {item.starsRate}
                             preview_image = {item.preview_image}
                          />
                     </Link>
