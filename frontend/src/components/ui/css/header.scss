@@ -71,7 +71,7 @@
                 all: unset;
                 position: relative;
                 opacity: 0;
-                top: 5%;
+                top: 2%;
                 display: flex;
                 width: 100%;
                 height: auto;
@@ -122,6 +122,10 @@
 
                             .title {
                                 font-weight: 600;
+                                span {
+                                    display: flex;
+                                    align-items: center;
+                                }
                             }
 
                             .subtitle {

@@ -59,7 +59,7 @@ const Counter = React.forwardRef(function (props, counterRef) {
 
 Counter.propTypes = {
     id: PropTypes.string,
-    title : PropTypes.string.isRequired,
+    title : PropTypes.node.isRequired,
     subtitle : PropTypes.string.isRequired,
     initialValue : PropTypes.number,
     max: PropTypes.number,
