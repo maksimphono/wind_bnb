@@ -1,6 +1,6 @@
 import Card from "../../components/ui/Card.jsx";
 import LoadingComponent from "../../components/ui/LoadingComponent.jsx";
-import {useMemo, useEffect, useContext, useState} from "react";
+import {useMemo, useEffect, useContext, useState, useCallback} from "react";
 import {Link} from "react-router-dom";
 import "./css/card_collection_style.scss";
 import useFetch from "../../hooks/useFetch.jsx";
@@ -16,12 +16,17 @@ function useFetchWithQuery(url, filterName, query){
 }
 
 export default function(props) {
-    const {query} = useContext(FetchContext);
+    const {query, setQuery} = useContext(FetchContext);
     const [{data, isLoading, status, error}, setResults] = useState({data : [], isLoading : true, status : "", error: ""});
 
+    const disableQuery = useCallback(() => setQuery(""), [query]);
+
     useEffect(() => {
-        console.log(data);
-    }, [data, isLoading]);
+        $(document).on("reload", disableQuery);
+        return () => {
+            $(document).off("reload", disableQuery);
+        }
+    }, []);
 
     useEffect(() => {
         let url = "http://127.0.0.1:8000/api"
