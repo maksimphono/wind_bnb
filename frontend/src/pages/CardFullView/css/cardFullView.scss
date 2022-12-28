@@ -57,6 +57,7 @@
         display: grid;
         grid-template: 1fr 1fr / 2fr 1fr 1fr;
         gap: 10px;
+        max-height: 600px;
 
         @media screen and (max-width : 800px) {
             & {
@@ -80,12 +81,13 @@
             max-width: 100%;
             border-radius: 5px;
             outline: 1px solid #777;
-            object-fit: fill;
+            object-fit: cover;
             cursor: pointer;
 
             &:first-child {
                 grid-column: 1 / 2;
                 grid-row: 1 / span 2;
+                min-width: 100%;
             }
         }
     }
