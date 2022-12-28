@@ -1,4 +1,4 @@
-import { useRef, useReducer, useState } from "react";
+import { useRef, useReducer, useState, useContext } from "react";
 import {Link} from "react-router-dom";
 import "./css/header.scss";
 //import searchIcon from "../../assets/icons/search__icon.svg";
@@ -6,7 +6,9 @@ import logo from "../../logo.svg"
 import FilterInSearchBar from "./FilterInSearchBar";
 import FilterGuestsInSearchBar from "./FilterGuestsInSearchBar";
 import SearchButton from "./SearchButton";
+import { FetchContext } from "../../Layout";
 import $ from "jquery";
+import useFetch from "../../hooks/useFetch.jsx";
 
 import {location_selection_fielt_id, adults_number_field_id, children_number_field_id} from "../../data/fields_html_ids.js";
 
@@ -21,16 +23,18 @@ export default function (props) {
     const [showLocationSelect, setShowLocationSelect] = useState(false);
     const [showGuestsSelect, setShowGuestsSelect] = useState(false);
     const [showSearchLabel, toggleSearchLabel] = useState(false);
-    
-    const onSubmit = ({target}) => {
-        const $target = $(target);
-        console.log(location_selection_fielt_id)
-        const content = {
-            location: $target.find("#" + location_selection_fielt_id).data("value"),
-            adults : $("#" + adults_number_field_id).data("value"),
-            children : $("#" + children_number_field_id).data("value")
+    const {setQuery} = useContext(FetchContext);
+
+    const onSubmit = (event) => {
+        event.preventDefault()
+        const $target = $(event.target);
+        const querySelection = {
+            location: $("#" + location_selection_fielt_id)[0].dataset.value,
+            adults : +$("#" + adults_number_field_id)[0].dataset.value,
+            children : +$("#" + children_number_field_id)[0].dataset.value
         }
-        console.table(content);
+        console.table(querySelection);
+        setQuery && setQuery(querySelection);
     }
 
     const onToggleSelection = (val) => {

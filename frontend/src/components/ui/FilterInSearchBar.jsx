@@ -26,7 +26,7 @@ export default React.forwardRef(function(props, ref) {
         <div className = "search-bar" name = "search__filters">
             <div className = "summary" onClick = {onToggleSelectionDiv}>
                 <span>{props.title}</span>
-                <span id = {location_selection_fielt_id} data-value = {selectedItemIndex}>{props.list[selectedItemIndex] || "No location specified"}</span>
+                <span id = {location_selection_fielt_id} data-value = {props.list[selectedItemIndex]}>{props.list[selectedItemIndex] || "No location specified"}</span>
             </div>
             <div 
                 ref = {selectionDivRef} 
@@ -46,4 +46,3 @@ export default React.forwardRef(function(props, ref) {
         </div>
     )
 })
-
