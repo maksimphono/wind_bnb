@@ -1,4 +1,4 @@
-import { useRef, useReducer, useState } from "react";
+import { useRef, useReducer, useState, useContext } from "react";
 import {Link} from "react-router-dom";
 import "./css/header.scss";
 //import searchIcon from "../../assets/icons/search__icon.svg";
@@ -6,6 +6,7 @@ import logo from "../../logo.svg"
 import FilterInSearchBar from "./FilterInSearchBar";
 import FilterGuestsInSearchBar from "./FilterGuestsInSearchBar";
 import SearchButton from "./SearchButton";
+import { FetchContext } from "../../Layout";
 import $ from "jquery";
 import useFetch from "../../hooks/useFetch.jsx";
 
@@ -22,16 +23,18 @@ export default function (props) {
     const [showLocationSelect, setShowLocationSelect] = useState(false);
     const [showGuestsSelect, setShowGuestsSelect] = useState(false);
     const [showSearchLabel, toggleSearchLabel] = useState(false);
-    
-    const useOnSubmit = ({target}) => {
-        const $target = $("target");
-        console.log(location_selection_fielt_id)
+    const {setQuery} = useContext(FetchContext);
+
+    const onSubmit = (event) => {
+        event.preventDefault()
+        const $target = $(event.target);
         const querySelection = {
-            location: $target.find("#" + location_selection_fielt_id).data("value"),
-            adults : $("#" + adults_number_field_id).data("value"),
-            children : $("#" + children_number_field_id).data("value")
+            location: $("#" + location_selection_fielt_id)[0].dataset.value,
+            adults : +$("#" + adults_number_field_id)[0].dataset.value,
+            children : +$("#" + children_number_field_id)[0].dataset.value
         }
-        props.setQuery && props.setQuery("here");
+        console.table(querySelection);
+        setQuery && setQuery(querySelection);
     }
 
     const onToggleSelection = (val) => {
@@ -47,7 +50,7 @@ export default function (props) {
                 className = "search" 
                 onMouseEnter={(e) => toggleSearchLabel(true)} 
                 onMouseLeave={(e) => onToggleSelection(false)}
-                onSubmit = {useOnSubmit}
+                onSubmit = {onSubmit}
             >
                 
                 <FilterInSearchBar 
