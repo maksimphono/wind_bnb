@@ -8,7 +8,13 @@ from .serializers import WindBnBCardSerializer, ImageSerializer
 
 class CardsCollection(generics.ListCreateAPIView):
     def get_queryset(self):
-        return WindBnBCardModel.objects.all()
+        try:
+            query = self.kwargs["location"]
+        except KeyError:
+            return WindBnBCardModel.objects.all()
+
+        return WindBnBCardModel.objects.filter(location = query)
+
     serializer_class = WindBnBCardSerializer
 
 class WindBnBCard(generics.RetrieveUpdateDestroyAPIView):

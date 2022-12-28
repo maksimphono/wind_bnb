@@ -8,6 +8,7 @@ class WindBnBCardSerializer(serializers.ModelSerializer):
             "id",
             "title",
             "preview_image",
+            "location",
             "adress",
             "starsRate",
             "priceForNight",
