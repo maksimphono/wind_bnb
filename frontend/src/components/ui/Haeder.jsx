@@ -58,7 +58,7 @@ export default function (props) {
                     toggle = {setShowLocationSelect}
                     location_selection_id = "location_selection_id"
                     title = "Location" 
-                    list = {["Finland, Helsinki", "Finland, Guavar"]}
+                    list = {["Finland, Helsinki", "Finland, Guavar", "Thailand, Lopburi"]}
                 />
                 <FilterGuestsInSearchBar 
                     show = {showGuestsSelect}
