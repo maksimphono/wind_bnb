@@ -7,6 +7,7 @@ import FilterInSearchBar from "./FilterInSearchBar";
 import FilterGuestsInSearchBar from "./FilterGuestsInSearchBar";
 import SearchButton from "./SearchButton";
 import $ from "jquery";
+import useFetch from "../../hooks/useFetch.jsx";
 
 import {location_selection_fielt_id, adults_number_field_id, children_number_field_id} from "../../data/fields_html_ids.js";
 
@@ -22,15 +23,15 @@ export default function (props) {
     const [showGuestsSelect, setShowGuestsSelect] = useState(false);
     const [showSearchLabel, toggleSearchLabel] = useState(false);
     
-    const onSubmit = ({target}) => {
-        const $target = $(target);
+    const useOnSubmit = ({target}) => {
+        const $target = $("target");
         console.log(location_selection_fielt_id)
-        const content = {
+        const querySelection = {
             location: $target.find("#" + location_selection_fielt_id).data("value"),
             adults : $("#" + adults_number_field_id).data("value"),
             children : $("#" + children_number_field_id).data("value")
         }
-        console.table(content);
+        props.setQuery && props.setQuery("here");
     }
 
     const onToggleSelection = (val) => {
@@ -46,7 +47,7 @@ export default function (props) {
                 className = "search" 
                 onMouseEnter={(e) => toggleSearchLabel(true)} 
                 onMouseLeave={(e) => onToggleSelection(false)}
-                onSubmit = {onSubmit}
+                onSubmit = {useOnSubmit}
             >
                 
                 <FilterInSearchBar 

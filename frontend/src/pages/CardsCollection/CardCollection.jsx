@@ -1,17 +1,31 @@
 import Card from "../../components/ui/Card.jsx";
 import LoadingComponent from "../../components/ui/LoadingComponent.jsx";
-import {useMemo, useEffect} from "react";
+import {useMemo, useEffect, useReducer, useState} from "react";
 import {Link} from "react-router-dom";
 import "./css/card_collection_style.scss";
 import useFetch from "../../hooks/useFetch.jsx";
 import $ from "jquery"
 
+function useFetchReducer(state, action){
+    return useFetch(action.url + action.query);
+}
+
+function createAction(type, url, query = ""){
+    return {type, url, query}
+}
+
 export default function(props) {
-    const {data, isLoading, status, error} = useFetch("http://127.0.0.1:8000/api");
+
+    const [{data, isLoading, status, error}, dispatch] = useReducer(useFetchReducer, useFetch("http://127.0.0.1:8000/api"));
+    const [query, setQuery] = useState("");
 
     useEffect(() => {
         console.log(data);
     }, [data, isLoading]);
+
+    useEffect(() => {
+        dispatch(createAction("fetch", "http://127.0.0.1:8000/api/", query));
+    }, [query]);
 
     if (isLoading) {
         return <LoadingComponent />
