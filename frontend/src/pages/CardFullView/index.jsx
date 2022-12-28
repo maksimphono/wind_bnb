@@ -8,14 +8,15 @@ import {useParams} from "react-router-dom";
 import $ from "jquery";
 import LoadingComponent from "../../components/ui/LoadingComponent";
 import DateInput from "../../components/ui/DateInput";
+import { API_URL } from "../../settings";
 
 export default function() {
     const [showImages, setShowImages] = useState(false);
     const [isOpenDrop, setIsOpenDrop] = useState(false);
     const onShowImages = useCallback(() => setShowImages(true));
     const {id} = useParams();
-    const {data, isLoading, status, error} = useFetch("http://127.0.0.1:8000/api/" + id);
-    const {data : dataImages, isLoading : imagesIsLoading, status : imagesStatus, error : imagesError} = useFetch("http://127.0.0.1:8000/api/image/" + id)
+    const {data, isLoading, status, error} = useFetch(API_URL + "/" + id);
+    const {data : dataImages, isLoading : imagesIsLoading, status : imagesStatus, error : imagesError} = useFetch(API_URL + "/image/" + id)
 
     useEffect(() => {
         $(".images img").on("click", onShowImages);

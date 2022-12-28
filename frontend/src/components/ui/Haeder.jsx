@@ -45,7 +45,7 @@ export default function (props) {
 
     return (
         <div className = "header">
-            <Link to = "/" className = "brand" onClick = {() => setQuery("")}></Link>
+            <Link to = "/" className = "brand" onClick = {() => window.location.href = "/"}></Link>
             <form 
                 className = "search" 
                 onMouseEnter={(e) => toggleSearchLabel(true)} 
