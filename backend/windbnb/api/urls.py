@@ -7,4 +7,5 @@ urlpatterns = [
     path('<int:pk>/', views.WindBnBCard.as_view()),
     path("location/<str:location>", views.CardsCollection.as_view()),
     path("image/<int:img_id>/", views.ImageCollection.as_view()),
+    path("owner/<int:pk>/", views.OwnerView.as_view()),
 ]
