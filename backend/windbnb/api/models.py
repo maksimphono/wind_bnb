@@ -23,7 +23,7 @@ class WindBnBCardModel(models.Model):
     preview_image = models.ImageField(upload_to="pictures", default = "media/pictures/default_house.png")
 
     # will design models relationship later
-    owner = models.CharField(max_length = 19, default = "")
+    owner = models.OneToOneField(Owner, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.title
