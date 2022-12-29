@@ -37,7 +37,7 @@ export default React.forwardRef(function(props, ref) {
                     {props.list && props.list.map(
                         (item, i) => (
                             <li key = {i} onClick = {() => onSelectItem(i)}>
-                                {item.toString()}<i className = "material-icons">location_city</i>
+                                {item.toString()}{item && <i className = "material-icons">location_city</i>}
                             </li>
                         ))
                     }
@@ -46,4 +46,3 @@ export default React.forwardRef(function(props, ref) {
         </div>
     )
 })
-

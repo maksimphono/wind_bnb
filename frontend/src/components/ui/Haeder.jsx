@@ -45,7 +45,7 @@ export default function (props) {
 
     return (
         <div className = "header">
-            <Link to = "/" className = "brand">Wind BnB</Link>
+            <Link to = "/" className = "brand" onClick = {() => window.location.href = "/"}></Link>
             <form 
                 className = "search" 
                 onMouseEnter={(e) => toggleSearchLabel(true)} 
@@ -58,7 +58,7 @@ export default function (props) {
                     toggle = {setShowLocationSelect}
                     location_selection_id = "location_selection_id"
                     title = "Location" 
-                    list = {["Finland, Helsinki", "Finland, Guavar"]}
+                    list = {["", "Finland, Helsinki", "Finland, Guavar", "Thailand, Lopburi"]}
                 />
                 <FilterGuestsInSearchBar 
                     show = {showGuestsSelect}

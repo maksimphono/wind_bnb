@@ -6,10 +6,16 @@
     justify-content: start;
     gap: $gap-within-card;
     max-width: auto;
-    height: max-content;
+    height: 500px;
+    max-height: 500px;
     border-radius: $card-border-radius;
-    padding-bottom: .5rem;
+    padding-bottom: 1rem;
+    //overflow: auto;
     cursor: pointer;
+
+    &:hover {
+        box-shadow: 0 0 5px #333;
+    }
     
     .preview-image {
         display: block;
@@ -22,9 +28,15 @@
             border-radius: $card-border-radius;
             height: 100%;
             width: 100%;
+            object-fit: cover;
             //max-width: 395px;
             //max-height: 269px;
         }
+    }
+
+    .title,
+    .description {
+        margin-inline: 2%;
     }
 
     .title {
@@ -33,6 +45,7 @@
         width: 100%;
         gap: 1em;
         font-family: 'Montserrat';
+        
         
         span.name {
             display: flex;
@@ -45,6 +58,7 @@
             
             span.super-host {
                 display: flex;
+                word-wrap: unset;
                 align-items: center;
                 justify-content: center;
                 width: $super-host-width;
@@ -54,6 +68,7 @@
                 border: 2px solid #4F4F4F;
                 border-radius: $super-host-border-radius;
                 font: normal, none, 700, 12px / 15px;
+                overflow: hidden;
             }
         }
         span.stars {

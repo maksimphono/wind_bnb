@@ -9,17 +9,27 @@
     margin-bottom: 1rem;
     padding: 32px 0;
 
-    .brand {
-        all: unset;
-        width: auto;
-        min-width: 100px;
-        height: max-content;
-        min-height: 20px;
-        margin-right: 1rem;
-        cursor: pointer;
+    @media screen and (max-width: $phone_screen_width) {
+        & {
+            flex-direction: column;
+            gap: $gap-between-cards;
+        }
     }
 
-    .search {
+    .brand {
+        all: unset;
+        width: max-content;
+        min-width: 155px;
+        height: max-content;
+        min-height: 50px;
+        margin-right: 1rem;
+        cursor: pointer;
+        background-image: url("../../../assets/icons/WindBnBLogo.png");
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+
+    form.search {
         $form-search-width: 297px;
         display: flex;
         justify-content: space-between;
@@ -99,12 +109,13 @@
                         height: auto;
                         font-size: 1.2rem;
                         padding: 3% 5%;
+                        border-bottom: 2px solid #333;
                         
                         &::after {
                             content: '';
                             position: absolute;
                             top: 50%;
-                            display: block;
+                            display: none;
                             background: rgb(106, 106, 106);
                             width: 90%;
                             height: 2px;
@@ -113,6 +124,7 @@
                         
                         &:last-child {
                             border-radius: inherit;
+                            border-bottom: none;
                         }
 
                         .guests__counter {

@@ -20,13 +20,13 @@
 }
 
 
-@media screen and (width < 900px) {
+@media screen and (width < $ipad_screen_width) {
     .card-collection {
         grid-template-columns: 1fr 1fr;
     }
 }
 
-@media screen and (width < 500px) {
+@media screen and (width < $phone_screen_width) {
     .card-collection {
         grid-template-columns: 1fr;
     }

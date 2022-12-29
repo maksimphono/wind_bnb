@@ -1,19 +1,27 @@
 import styles from "./css/imagesview.module.scss";
 import {useCallback, useState} from "react";
+import PropTypes from "prop-types";
 
 function ImagesView(props) {
     return (
         props.show && <div className = {styles.images__view}>
-            <button className = {styles.close__button} onClick = {props.handleClose}>X</button>
+            <button className = {styles.close__button} onClick = {props.handleClose}><i className = "material-icons">close</i></button>
             <div className = {styles.images}>
-                <img src="https://th.bing.com/th/id/R.149a813e49860f6b6bde0872a869fedb?rik=DyHz0u5KYXdpFQ&pid=ImgRaw&r=0" alt="" />
-                <img src="https://th.bing.com/th/id/R.149a813e49860f6b6bde0872a869fedb?rik=DyHz0u5KYXdpFQ&pid=ImgRaw&r=0" alt="" />
-                <img src="https://th.bing.com/th/id/OIP.co2IySTzP1YwwIaVwGgrigHaE8?pid=ImgDet&w=800&h=534&rs=1" alt="" />
-                <img src="https://th.bing.com/th/id/R.149a813e49860f6b6bde0872a869fedb?rik=DyHz0u5KYXdpFQ&pid=ImgRaw&r=0" alt="" />
-                <img src="https://th.bing.com/th/id/R.149a813e49860f6b6bde0872a869fedb?rik=DyHz0u5KYXdpFQ&pid=ImgRaw&r=0" alt="" />
+                {props.images.map(item => 
+                    <img key = {item.card} src = {item.image} alt = ""/>
+                )}
             </div>
         </div>
     );
+}
+
+ImagesView.propTypes = {
+    show : PropTypes.bool,
+    handleClose : PropTypes.func,
+    images : PropTypes.shape({
+        card : PropTypes.number,
+        image : PropTypes.string
+    })
 }
 
 export default ImagesView;
