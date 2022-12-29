@@ -2,6 +2,10 @@ from django.db import models
 
 # Create your models here.
 
+class Owner(models.Model):
+    name = models.CharField(max_length=20)
+    avatar = models.ImageField(upload_to="avatars", default="avatars/default_avatar.png")
+
 class WindBnBCardModel(models.Model):
     title = models.CharField(max_length = 100)
     description = models.TextField()
