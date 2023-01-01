@@ -51,11 +51,11 @@ export default function() {
                 <h2>{data.title}</h2>
                 <span className = "star__number"><i className="material-icons">star</i>{data.starsRate} stars</span>
                 <span className = "superhost">Superhost</span>
-                <span className = "adress">Ko Samui, Chang Wat Surat Thani, Thailand</span>
+                <span className = "adress">{data.adress}</span>
             </div>
             <div className = "images">
                 {dataImages.map(item => 
-                    <img key = {item.card} src={item.image} alt="" />
+                    <img key = {item.card} src={item.image} alt={data.title} />
                 )}
             </div>
             <p className="description">
@@ -63,7 +63,7 @@ export default function() {
             </p>
             <div className = "owner__info">
                 <p className = "info">Entire house is owed by {owner.name}</p>
-                <img src={owner.avatar} alt="" className = "avatar" />
+                <img src={owner.avatar} alt={owner.name} className = "avatar" />
             </div>
             <form className = "reserve__card">
                 <div className = "reserve__card__title">
