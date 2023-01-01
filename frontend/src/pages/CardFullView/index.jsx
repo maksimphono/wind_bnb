@@ -27,7 +27,16 @@ export default function() {
     }, [dataImages]);
 
     useEffect(() => {
-        setOwner(useFetch(API_URL + "/owner/" + data.owner));
+        $.ajax({
+            url : API_URL + "/owner/" + data.owner,
+            dataType : "json",
+            success: function (ownerData) {
+                setOwner(ownerData);
+            },
+            error : function (err) {
+                console.log("Error while fetching owner info : ", err);
+            }
+        })
     }, [data])
 
     if (isLoading || imagesIsLoading) {
@@ -53,8 +62,8 @@ export default function() {
                 {data.description}
             </p>
             <div className = "owner__info">
-                <p className = "info">Entire house is owed by {data.owner}</p>
-                <img src="" alt="" className = "avatar" />
+                <p className = "info">Entire house is owed by {owner.name}</p>
+                <img src={owner.avatar} alt="" className = "avatar" />
             </div>
             <form className = "reserve__card">
                 <div className = "reserve__card__title">
