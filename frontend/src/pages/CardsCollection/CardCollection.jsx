@@ -44,26 +44,31 @@ export default function(props) {
         
     }, [query]);
 
+    useEffect(() => {
+        console.log(data)
+    }, [data])
+
     if (isLoading) {
         return <LoadingComponent />
     }
-
     return (
         <>
-            <h1 className = "stay-location">Stay in Finland</h1>
-            <div className = "card-collection">
-                {data?.map(item => 
-                    <Link key = {item.id} to = {"/full/" + item.id}>
-                        <Card 
-                            name = {item.title} 
-                            description = {item.description} 
-                            isSuperHost 
-                            starsRate = {item.starsRate}
-                            preview_image = {item.preview_image}
-                         />
-                    </Link>
-                )}
-            </div>
+            <h1 className = "stay-location">Stay {query.location || "anywhere"}</h1>
+            {!data.length && <h3 className = "card-collection">No results</h3> || 
+                <div className = "card-collection">
+                    {data?.map(item => 
+                        <Link key = {item.id} to = {"/full/" + item.id}>
+                            <Card 
+                                name = {item.title} 
+                                description = {item.description} 
+                                isSuperHost 
+                                starsRate = {item.starsRate}
+                                preview_image = {item.preview_image}
+                            />
+                        </Link>
+                    )}
+                </div>
+            }
         </>       
     )
 }
