@@ -16,6 +16,7 @@ export default function() {
     const onShowImages = useCallback(() => setShowImages(true));
     const {id} = useParams();
     const {data, isLoading, status, error} = useFetch(API_URL + "/" + id);
+    const [owner, setOwner] = useState({ownerData : null, ownerIsLoading : null});
     const {data : dataImages, isLoading : imagesIsLoading, status : imagesStatus, error : imagesError} = useFetch(API_URL + "/image/" + id)
 
     useEffect(() => {
@@ -24,6 +25,10 @@ export default function() {
             $(".images img").off("click", onShowImages);
         }
     }, [dataImages]);
+
+    useEffect(() => {
+        setOwner(useFetch(API_URL + "/owner/" + data.owner));
+    }, [data])
 
     if (isLoading || imagesIsLoading) {
         return <LoadingComponent />
