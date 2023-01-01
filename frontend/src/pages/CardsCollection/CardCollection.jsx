@@ -7,6 +7,7 @@ import useFetch from "../../hooks/useFetch.jsx";
 import $ from "jquery"
 import { FetchContext } from "../../Layout.jsx";
 import { API_URL, LOCATION_FILTER } from "../../settings.js";
+import EmptyResult from "../../components/ui/EmptyResult.jsx";
 
 function useFetchWithQuery(url, filterName, query){
     let adress = url;
@@ -53,8 +54,9 @@ export default function(props) {
     }
     return (
         <>
-            <h1 className = "stay-location">Stay {query.location || "anywhere"}</h1>
-            {!data.length && <h3 className = "card-collection">No results</h3> || 
+            <h1 className = "stay-location">Stay {query.location && "in " + query.location || "anywhere"}</h1>
+
+            {!data.length && <EmptyResult returnToHP={() => setQuery("")} /> || 
                 <div className = "card-collection">
                     {data?.map(item => 
                         <Link key = {item.id} to = {"/full/" + item.id}>
