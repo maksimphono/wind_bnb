@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from .models import WindBnBCardModel, Image
+from .models import WindBnBCardModel, Image, Owner
 
 class WindBnBCardSerializer(serializers.ModelSerializer):
     class Meta:
@@ -27,3 +27,11 @@ class ImageSerializer(serializers.ModelSerializer):
             "card"
         )
         model = Image
+    
+class OwnerSerializer(serializers.ModelSerializer):
+    class Meta:
+        fields = (
+            "avatar",
+            "name"
+        )
+        model = Owner

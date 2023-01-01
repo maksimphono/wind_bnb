@@ -2,6 +2,13 @@ from django.db import models
 
 # Create your models here.
 
+class Owner(models.Model):
+    name = models.CharField(max_length=20)
+    avatar = models.ImageField(upload_to="avatars", default="avatars/default_avatar.png")
+
+    def __str__(self):
+        return self.name
+
 class WindBnBCardModel(models.Model):
     title = models.CharField(max_length = 100)
     description = models.TextField()
@@ -19,7 +26,7 @@ class WindBnBCardModel(models.Model):
     preview_image = models.ImageField(upload_to="pictures", default = "media/pictures/default_house.png")
 
     # will design models relationship later
-    owner = models.CharField(max_length = 19, default = "")
+    owner = models.OneToOneField(Owner, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.title
