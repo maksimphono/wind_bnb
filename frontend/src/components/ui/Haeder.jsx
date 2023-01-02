@@ -11,6 +11,7 @@ import $ from "jquery";
 import useFetch from "../../hooks/useFetch.jsx";
 
 import {location_selection_fielt_id, adults_number_field_id, children_number_field_id} from "../../data/fields_html_ids.js";
+import { API_URL } from "../../settings";
 
 export function toggleElem(elem, hide) {
     $(elem).css({
@@ -23,6 +24,7 @@ export default function (props) {
     const [showLocationSelect, setShowLocationSelect] = useState(false);
     const [showGuestsSelect, setShowGuestsSelect] = useState(false);
     const [showSearchLabel, toggleSearchLabel] = useState(false);
+    const {data : locations, isLoading : locationsIsLoading} = useFetch(API_URL + "/locations")
     const {setQuery} = useContext(FetchContext);
 
     const onSubmit = (event) => {
@@ -52,14 +54,15 @@ export default function (props) {
                 onMouseLeave={(e) => onToggleSelection(false)}
                 onSubmit = {onSubmit}
             >
-                
-                <FilterInSearchBar 
-                    show = {showLocationSelect}
-                    toggle = {setShowLocationSelect}
-                    location_selection_id = "location_selection_id"
-                    title = "Location" 
-                    list = {["", "Finland, Helsinki", "Finland, Guavar", "Thailand, Lopburi"]}
-                />
+                {locations.length && 
+                    <FilterInSearchBar 
+                        show = {showLocationSelect}
+                        toggle = {setShowLocationSelect}
+                        location_selection_id = "location_selection_id"
+                        title = "Location" 
+                        list = {locations}
+                    />
+                }
                 <FilterGuestsInSearchBar 
                     show = {showGuestsSelect}
                     toggle = {setShowGuestsSelect} 
