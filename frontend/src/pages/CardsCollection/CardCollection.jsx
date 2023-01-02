@@ -34,7 +34,7 @@ export default function(props) {
         let url = API_URL
         console.log("query : ", query.location?.replaceAll(" ", ""));
         if (query) {
-            url += "/" + LOCATION_FILTER + query.location?.replaceAll(" ", "");
+            url += "/" + LOCATION_FILTER + "=" + query.location;
         }
         $.ajax({
             url : url,
@@ -54,7 +54,7 @@ export default function(props) {
     }
     return (
         <>
-            <h1 className = "stay-location">Stay {query.location && "in " + query.location || "anywhere"}</h1>
+            <h1 className = "stay-location">Stay {data.country && "in " + data.country || "anywhere"}</h1>
 
             {!data.length && <EmptyResult returnToHP={() => setQuery("")} /> || 
                 <div className = "card-collection">

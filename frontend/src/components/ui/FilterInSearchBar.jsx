@@ -16,10 +16,12 @@ export default React.forwardRef(function(props, ref) {
     const selectionDivRef = useRef();
     
     useEffect(() => {
+        console.log("Items : ", props.list)
         $(selectionDivRef.current)?.find("ul.selection").css("height", !props.show? "0px": "max-content");
     }, [props.show]);
     
     const onSelectItem = (index) => {
+        console.log("select item : ", props.list[index].id)
         setSelectedItemIndex(index);
     }
 
