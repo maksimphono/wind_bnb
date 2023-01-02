@@ -1,8 +1,8 @@
 from django.shortcuts import render
 from rest_framework import generics
 
-from .models import WindBnBCardModel, Image, Owner
-from .serializers import WindBnBCardSerializer, ImageSerializer, OwnerSerializer
+from .models import WindBnBCardModel, Image, Owner, Location
+from .serializers import WindBnBCardSerializer, ImageSerializer, OwnerSerializer, LocationSerializer
 
 # Create your views here.
 

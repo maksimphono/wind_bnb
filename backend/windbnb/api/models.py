@@ -2,6 +2,12 @@ from django.db import models
 
 # Create your models here.
 
+class Location(models.Model):
+    city = models.CharField(max_length=20)
+
+    def __str__(self):
+        return self.city
+
 class Owner(models.Model):
     name = models.CharField(max_length=20)
     avatar = models.ImageField(upload_to="avatars", default="avatars/default_avatar.png")
@@ -10,6 +16,8 @@ class Owner(models.Model):
         return self.name
 
 class WindBnBCardModel(models.Model):
+    location = models.ForeignKey(Location, on_delete=models.CASCADE)
+
     title = models.CharField(max_length = 100)
     description = models.TextField()
     adress = models.TextField(default = "")
@@ -21,7 +29,7 @@ class WindBnBCardModel(models.Model):
     nocancelationfee = models.BooleanField(default = False)
     securitysystems = models.BooleanField(default = False)
 
-    location = models.CharField(max_length=255, default = "")
+    #location = models.CharField(max_length=255, default = "")
 
     preview_image = models.ImageField(upload_to="pictures", default = "media/pictures/default_house.png")
 

@@ -35,3 +35,9 @@ class OwnerSerializer(serializers.ModelSerializer):
             "name"
         )
         model = Owner
+
+class LocationSerializer(serializers.ModelSerializer):
+    class Meta:
+        fields = (
+            "city",
+        )
