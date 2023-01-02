@@ -32,9 +32,8 @@ export default function(props) {
 
     useEffect(() => {
         let url = API_URL
-        console.log("query : ", query.location?.replaceAll(" ", ""));
-        if (query) {
-            url += "/" + LOCATION_FILTER + "=" + query.location;
+        if (query?.location?.id) {
+            url += "/" + LOCATION_FILTER + "=" + query.location.id;
         }
         $.ajax({
             url : url,
@@ -54,8 +53,8 @@ export default function(props) {
     }
     return (
         <>
-            <h1 className = "stay-location">Stay {data.country && "in " + data.country || "anywhere"}</h1>
-
+            <h1 className = "stay-location">Stay {query?.location?.name && "in " + query.location.name || "anywhere"}</h1>
+            
             {!data.length && <EmptyResult returnToHP={() => setQuery("")} /> || 
                 <div className = "card-collection">
                     {data?.map(item => 

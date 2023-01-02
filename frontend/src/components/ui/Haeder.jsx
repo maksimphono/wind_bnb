@@ -31,7 +31,10 @@ export default function (props) {
         event.preventDefault()
         const $target = $(event.target);
         const querySelection = {
-            location: $("#" + location_selection_fielt_id)[0].dataset.value,
+            location: {
+                id : $("#" + location_selection_fielt_id)[0].dataset.value,
+                name : $("#" + location_selection_fielt_id)[0].dataset.name,
+            },
             adults : +$("#" + adults_number_field_id)[0].dataset.value,
             children : +$("#" + children_number_field_id)[0].dataset.value
         }

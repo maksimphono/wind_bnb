@@ -34,6 +34,7 @@ export default React.forwardRef(function(props, ref) {
                 <span 
                     id = {location_selection_fielt_id} 
                     data-value = {props.list[selectedItemIndex]?.id}
+                    data-name = {props.list[selectedItemIndex]?.city}
                 >
                     {makeLocation(props.list[selectedItemIndex]) || "No location specified"}
                 </span>
