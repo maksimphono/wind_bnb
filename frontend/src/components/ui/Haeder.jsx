@@ -24,7 +24,7 @@ export default function (props) {
     const [showLocationSelect, setShowLocationSelect] = useState(false);
     const [showGuestsSelect, setShowGuestsSelect] = useState(false);
     const [showSearchLabel, toggleSearchLabel] = useState(false);
-    const {data : locations, isLoading : locationsIsLoading} = useFetch(API_URL + "/locations")
+    const {data : locationsData, isLoading : locationsDataIsLoading} = useFetch(API_URL + "/locations")
     const {setQuery} = useContext(FetchContext);
 
     const onSubmit = (event) => {
@@ -35,7 +35,6 @@ export default function (props) {
             adults : +$("#" + adults_number_field_id)[0].dataset.value,
             children : +$("#" + children_number_field_id)[0].dataset.value
         }
-        console.table(querySelection);
         setQuery && setQuery(querySelection);
     }
 
@@ -54,13 +53,13 @@ export default function (props) {
                 onMouseLeave={(e) => onToggleSelection(false)}
                 onSubmit = {onSubmit}
             >
-                {locations.length && 
+                {locationsData.length && 
                     <FilterInSearchBar 
                         show = {showLocationSelect}
                         toggle = {setShowLocationSelect}
                         location_selection_id = "location_selection_id"
                         title = "Location" 
-                        list = {locations}
+                        list = {locationsData}
                     />
                 }
                 <FilterGuestsInSearchBar 

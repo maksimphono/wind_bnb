@@ -31,6 +31,7 @@ class ImageSerializer(serializers.ModelSerializer):
 class OwnerSerializer(serializers.ModelSerializer):
     class Meta:
         fields = (
+            "id",
             "avatar",
             "name"
         )
@@ -39,6 +40,7 @@ class OwnerSerializer(serializers.ModelSerializer):
 class LocationSerializer(serializers.ModelSerializer):
     class Meta:
         fields = (
+            "id",
             "city",
             "country"
         )

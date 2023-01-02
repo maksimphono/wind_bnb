@@ -6,22 +6,20 @@ import { toggleElem } from "./Haeder";
 import {location_selection_fielt_id} from "../../data/fields_html_ids.js";
 
 function makeLocation(item){
-    if (item == null) return ""
+    if (item == null) return null;
     return item.country + ", " + item.city
 }
     
 export default React.forwardRef(function(props, ref) {
-    const [selectedItemIndex, setSelectedItemIndex] = useState(0);
+    const [selectedItemIndex, setSelectedItemIndex] = useState(-1);
 
     const selectionDivRef = useRef();
     
     useEffect(() => {
-        console.log("Items : ", props.list)
         $(selectionDivRef.current)?.find("ul.selection").css("height", !props.show? "0px": "max-content");
     }, [props.show]);
     
     const onSelectItem = (index) => {
-        console.log("select item : ", props.list[index].id)
         setSelectedItemIndex(index);
     }
 
@@ -35,7 +33,7 @@ export default React.forwardRef(function(props, ref) {
                 <span>{props.title}</span>
                 <span 
                     id = {location_selection_fielt_id} 
-                    data-value = {props.list[selectedItemIndex].id}
+                    data-value = {props.list[selectedItemIndex]?.id}
                 >
                     {makeLocation(props.list[selectedItemIndex]) || "No location specified"}
                 </span>
