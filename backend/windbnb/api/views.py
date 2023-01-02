@@ -9,7 +9,7 @@ from .serializers import WindBnBCardSerializer, ImageSerializer, OwnerSerializer
 class CardsCollection(generics.ListCreateAPIView):
     def get_queryset(self):
         try:
-            query = self.kwargs["location"]
+            query = self.kwargs["location_id"]
         except KeyError:
             return WindBnBCardModel.objects.all()
 
@@ -30,3 +30,7 @@ class OwnerView(generics.RetrieveUpdateDestroyAPIView):
     def get_queryset(self):
         return Owner.objects.all()
     serializer_class = OwnerSerializer
+
+class LocationsView(generics.ListCreateAPIView):
+    queryset = Location.objects.all()
+    serializer_class = LocationSerializer
