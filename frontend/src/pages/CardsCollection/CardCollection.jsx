@@ -62,7 +62,7 @@ export default function(props) {
                             <Card 
                                 name = {item.title} 
                                 description = {item.description} 
-                                isSuperHost 
+                                isSuperHost = {item.isSuperhost} 
                                 starsRate = {item.starsRate}
                                 preview_image = {item.preview_image}
                             />
