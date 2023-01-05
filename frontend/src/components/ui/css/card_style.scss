@@ -6,6 +6,7 @@
     justify-content: start;
     gap: $gap-within-card;
     max-width: auto;
+    width: auto;
     height: 500px;
     max-height: 500px;
     border-radius: $card-border-radius;
@@ -82,14 +83,18 @@
     }
     .description {
         display: flex;
-        width: 100%;
+        width: auto;
         height: auto;
         overflow: hidden;
 
         p {
             display: block;
-            width: auto;
+            word-wrap: break-word;
+            width: 100%;
             height: max-content;
+            // new
+            max-height: 90%;
+            overflow: hidden;
         }
     }    
 }
