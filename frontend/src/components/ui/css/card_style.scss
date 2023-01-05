@@ -6,11 +6,12 @@
     justify-content: start;
     gap: $gap-within-card;
     max-width: auto;
+    width: auto;
     height: 500px;
     max-height: 500px;
     border-radius: $card-border-radius;
     padding-bottom: 1rem;
-    //overflow: auto;
+    //overflow: hidden;
     cursor: pointer;
 
     &:hover {
@@ -61,8 +62,10 @@
                 word-wrap: unset;
                 align-items: center;
                 justify-content: center;
-                width: $super-host-width;
-                height: $super-host-height;
+                min-width: $super-host-width;
+                width: auto;//$super-host-width;
+                height: auto;//$super-host-height;
+                padding: 2px;
                 background-color: #0000;
                 color: #4F4F4F;
                 border: 2px solid #4F4F4F;
@@ -80,13 +83,17 @@
     }
     .description {
         display: flex;
-        width: 100%;
+        width: auto;
         height: auto;
+        overflow: hidden;
 
         p {
             display: block;
-            width: auto;
+            word-wrap: break-word;
+            width: 100%;
             height: max-content;
+            max-height: 90%;
+            overflow: hidden;
         }
     }    
 }
