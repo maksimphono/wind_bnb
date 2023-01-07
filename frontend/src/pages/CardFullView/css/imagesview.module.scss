@@ -1,3 +1,5 @@
+@use "../../../assets/settings.scss";
+
 .bg__filter {
     position: absolute;
     top: 50vh;
@@ -18,7 +20,7 @@
     justify-content: start;
     align-items: flex-start;
     gap: 5px;
-    width: 80vw;
+    width: 90vw;
     height: 100vh;
     background: #fff;
     padding: 10px;
@@ -31,15 +33,22 @@
     }
 
     .images {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 5px;
         overflow-y: auto;
         border-radius: inherit;
+
+        @media screen and (max-width : 500px) {
+            grid-template-columns: 1fr;
+        }
 
         img {
             display: block;
             width: 100%;
-            height: auto;
+            aspect-ratio: 1 / 1.1;
             object-fit: cover;
-            border-radius: inherit;
+            border-radius: 5px;
             box-shadow: 0 0 5px #444;
         }
     }
