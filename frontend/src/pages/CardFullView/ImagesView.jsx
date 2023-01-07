@@ -5,6 +5,7 @@ import PropTypes from "prop-types";
 function ImagesView(props) {
     return (
         props.show && <div className = {styles.images__view}>
+            <h3>Title</h3>
             <button className = {styles.close__button} onClick = {props.handleClose}><i className = "material-icons">close</i></button>
             <div className = {styles.images}>
                 {props.images.map(item => 
