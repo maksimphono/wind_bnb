@@ -1,9 +1,11 @@
 import scss from "./css/modal.module.scss"
-import {useState, useMemo, useEffect, memo} from "react";
+import {useState, useMemo, useEffect, useRef, memo} from "react";
+import $ from "jquery";
 
 function ModalComponent(props){
     const [show, setShow] = useState(props.show)
-    
+    const bgFilter = useRef();
+
     const handleClose = event => {
         setShow(false);
         props.onHide && props.onHide()
@@ -11,10 +13,14 @@ function ModalComponent(props){
 
     useEffect(() => {
         setShow(props.show);
-    }, [props.show])
+    }, [props.show]);
 
     return (
-        show && <div className = {scss.modal}>
+
+        show && 
+        <>
+        <div onClick = {handleClose} className = {scss.not__modal__filter} />
+        <div className = {scss.modal}>
             <div className = {scss.header}>
                 <button onClick = {handleClose}>
                     <i className = "material-icons">close</i>
@@ -27,6 +33,8 @@ function ModalComponent(props){
             <div className = {scss.footer}>
             </div>
         </div>
+        </>
+        
     )
 }
 
