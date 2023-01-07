@@ -14,3 +14,10 @@ $search-bar-border-radius: 16px;
 
 $ipad_screen_width: 900px;
 $phone_screen_width: 500px;
+
+@mixin absolute__center {
+    position: absolute;
+    top: 50vw;
+    left: 50vh;
+    transform: translate(-50%, -50%);
+}
