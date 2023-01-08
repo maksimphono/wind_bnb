@@ -21,7 +21,7 @@ function ReserveCard({data, togglerLabel, onSubmit}) {
         stayDuration % 10 === 1 && stayDuration !== 11?"day":"days"
     ), [stayDuration]);
 
-    const totalPrice = useCallback(() => {
+    const totalPrice = useMemo(() => {
         const price = Array.from("" + data?.priceForNight * stayDuration)
 
         if (price.length < 3) return price;
@@ -86,11 +86,13 @@ function ReserveCard({data, togglerLabel, onSubmit}) {
                     </div>                   
                 </form>
                 <button type = "submit">Reserve</button>
-                <span
-                    className = "count__total__price"
-                >
-                    Price for {stayDuration} {dayOrDays} will be ${totalPrice()}
-                </span>
+                {stayDuration > 0 && 
+                    <span
+                        className = "count__total__price"
+                    >
+                        Price for <b>{stayDuration}</b> {dayOrDays} will be <b>${totalPrice}</b>
+                    </span>
+                }
             </form>
     )
 }
