@@ -5,8 +5,10 @@ import CardFullView from "./pages/CardFullView/index.jsx";
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Layout from './Layout';
 import DateInput from './components/ui/DateInput';
+import ModalComponent from './components/ui/Modal';
 
 function App() {
+
   return (
     <BrowserRouter>
       <Routes>
@@ -17,6 +19,7 @@ function App() {
       </Routes>
     </BrowserRouter>
   );
+
 }
 
 export default App;

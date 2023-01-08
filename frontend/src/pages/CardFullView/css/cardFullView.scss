@@ -106,6 +106,20 @@
         border-radius: 5px;
         padding: 3%;
         overflow: auto;
+        font-size: 1.2rem;
+
+        button.read__more {
+            all: unset;
+            display: flex;
+            margin-top: 20px;
+            text-decoration: underline;
+            font-size: 1.3rem;
+            cursor: pointer;
+
+            &:hover {
+                color: rgb(196, 169, 207);
+            }
+        }
     }
 
     .owner__info {
