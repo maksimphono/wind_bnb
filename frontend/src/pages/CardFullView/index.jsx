@@ -1,6 +1,6 @@
 import "./css/cardFullView.scss";
 import ImagesView from "./ImagesView.jsx";
-import {useState, useEffect, useCallback, useMemo} from "react";
+import {useState, useEffect, useCallback, useMemo, useContext} from "react";
 import useFetch from "../../hooks/useFetch.jsx";
 import {useParams} from "react-router-dom";
 import $ from "jquery";
@@ -8,6 +8,8 @@ import LoadingComponent from "../../components/ui/LoadingComponent";
 import Modal from "../../components/ui/Modal.jsx";
 import ReserveCard from "./ReserveCard.jsx";
 import { API_URL } from "../../settings";
+import { ModalContext } from "../../Layout";
+import ReservationNotice from "./ReservationNotice";
 
 const BRIEF_DESCRIPTION_LEN = 300;
 
@@ -19,7 +21,7 @@ export default function() {
     const {data, isLoading, status, error} = useFetch(API_URL + "/" + id);
     const [owner, setOwner] = useState({ownerData : null, ownerIsLoading : null});
     const {data : dataImages, isLoading : imagesIsLoading, status : imagesStatus, error : imagesError} = useFetch(API_URL + "/image/" + id)
-
+    const manageModal = useContext(ModalContext);
     
     useEffect(() => {
         $(".images img").on("click", onShowImages);
@@ -51,14 +53,23 @@ export default function() {
         return brief.join("");
     }, [data.title, data.description])
 
+    const handleReadMore = useCallback((event) => {
+        manageModal.setModalTitle("About " + briefText(data.title, data.title?.indexOf(' ')))
+        manageModal.setModalText(data.description)
+        manageModal.setShowModal(true)
+    }, [data.title, data.description])
+
     const submitReservation = useCallback((metaData) => {
-        alert(
-            `You reserved apartment "${data.title}" for ${metaData.stayDuration}.\n
-            Check in date : ${metaData.checkInDate.toLocaleDateString().replaceAll('/', '.')}
-            Check out date : ${metaData.checkOutDate.toLocaleDateString().replaceAll('/', '.')}\n
-            Total price will be $${metaData.totalPrice}
-            `)
-    }, [data])
+        metaData.event.preventDefault()
+        manageModal.setModalTitle("Apartment reservation")
+        manageModal.setModalText(
+            <ReservationNotice 
+                title = {data.title} 
+                metaData = {metaData}
+            />
+        )
+        manageModal.setShowModal(true);
+    }, [data.title])
 
     if (isLoading || imagesIsLoading) {
         return <LoadingComponent />
@@ -66,9 +77,6 @@ export default function() {
 
     return (
         <>
-        <Modal show = {showAboutModal} title = {"About " + briefText(data.title, data.title?.indexOf(' '))} onHide = {() => setShowAboutModal(false)}>
-            <p>{data.description}</p>
-        </Modal>
         <ImagesView show = {showImages} images = {dataImages} handleClose = {() => setShowImages(false)}/>
         <div className = "card__full__view">
             <div className = "card__title">
@@ -85,7 +93,7 @@ export default function() {
             <p className="description">
                 {briefText(data.description, BRIEF_DESCRIPTION_LEN)}
                 {data.description.length >= BRIEF_DESCRIPTION_LEN && 
-                    <button className = "read__more" onClick = {() => setShowAboutModal(true)}>Read more...</button>
+                    <button className = "read__more" onClick = {handleReadMore}>Read more...</button>
                 }
             </p>
             <div className = "owner__info">

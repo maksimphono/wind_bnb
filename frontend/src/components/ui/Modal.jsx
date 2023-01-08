@@ -4,7 +4,7 @@ import $ from "jquery";
 
 function ModalComponent(props){
     const [show, setShow] = useState(props.show)
-    const bgFilter = useRef();
+
 
     const handleClose = event => {
         setShow(false);
