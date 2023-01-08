@@ -42,7 +42,7 @@ function ReserveCard({data, togglerLabel, onSubmit}) {
             setWarningMessages(arr => [...arr, "You can't reserve apartment in past"])
             return false;
         }
-        if (checkOutDate - checkInDate <= 0) {
+        if (checkOutDate - checkInDate < 0) {
             setWarningMessages(arr => [...arr, "We assume, you'd like to checkout AFTER check in."])
             return false;
         }
@@ -74,7 +74,7 @@ function ReserveCard({data, togglerLabel, onSubmit}) {
     return (
             <form className = "reserve__card" onSubmit = {handleSubmit}>
                 <div className = "reserve__card__title">
-                    <span>$ {data?.priceForNight || 0} <span>/ night</span></span>
+                    <span>${data?.priceForNight || 0}<span>/night</span></span>
                     <Stars stars = {data?.starsRate || 0} />
                 </div>
                 <form className = "set__in-out__date">
