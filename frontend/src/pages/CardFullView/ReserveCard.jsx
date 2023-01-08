@@ -12,10 +12,13 @@ const Stars = ({stars}) => (
 )
 
 function ReserveCard({data, togglerLabel, onSubmit}) {
+    const today = useMemo(() => new Date(), [])
     const [isDrDnOpen, setIsDrDnOpen] = useState(false);
-    const [checkInDate, setCheckInDate] = useState(new Date());
-    const [checkOutDate, setCheckOutDate] = useState(new Date());
+    const [checkInDate, setCheckInDate] = useState(today);
+    const [checkOutDate, setCheckOutDate] = useState(today);
     const [stayDuration, setStayDuration] = useState(0);
+
+    const [warningMessages, setWarningMessages] = useState([])
 
     const dayOrDays = useMemo(() => (
         stayDuration % 10 === 1 && stayDuration !== 11?"day":"days"
@@ -31,7 +34,29 @@ function ReserveCard({data, togglerLabel, onSubmit}) {
         return price;
     }, [stayDuration])
 
+    const validate = useCallback(() => {
+        const yesterday = new Date();
+        yesterday.setDate(today.getDate() - 1);
+        setWarningMessages([]);
+        if (checkInDate <= yesterday) {
+            setWarningMessages(arr => [...arr, "You can't reserve apartment in past"])
+            return false;
+        }
+        if (checkOutDate - checkInDate <= 0) {
+            setWarningMessages(arr => [...arr, "We assume, you'd like to checkout AFTER check in."])
+            return false;
+        }
+        return true;
+    }, [checkInDate, checkOutDate])
+
     useEffect(() => {
+        console.log("Submit btn : ", $("button[type='submit']"));
+        if (validate()) {
+            $("button[type='submit']").prop("disabled", false);
+        } else {
+            $("button[type='submit']").prop("disabled", true);
+        }
+
         setStayDuration(Math.ceil((checkOutDate - checkInDate) / 86_400_000));
     }, [checkInDate, checkOutDate])
 
@@ -86,12 +111,19 @@ function ReserveCard({data, togglerLabel, onSubmit}) {
                     </div>                   
                 </form>
                 <button type = "submit">Reserve</button>
-                {stayDuration > 0 && 
+                {stayDuration > 0 && !warningMessages.length && 
                     <span
                         className = "count__total__price"
                     >
                         Price for <b>{stayDuration}</b> {dayOrDays} will be <b>${totalPrice}</b>
                     </span>
+                }
+                {!!warningMessages.length && <ul className="warnings">
+                    {warningMessages.map((message, i) => (
+                            <li key = {i}>{message}</li>
+                        ))
+                    }
+                </ul>
                 }
             </form>
     )
