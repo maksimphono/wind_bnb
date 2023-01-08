@@ -4,6 +4,10 @@ import Counter from "../../components/ui/Counter.jsx";
 import DropDown from "../../components/ui/DropDown.jsx";
 import $ from "jquery";
 
+function dayOrDays(stayDuration) {
+    return stayDuration % 10 === 1 && stayDuration !== 11?"day":"days"
+}
+
 const Stars = ({stars}) => (
     <span style = {{display: "flex", alignItems: "center"}}>
         <i className="material-icons" style = {{color : "#f77"}}>star</i>
@@ -20,10 +24,6 @@ function ReserveCard({data, togglerLabel, onSubmit}) {
 
     const [warningMessages, setWarningMessages] = useState([])
 
-    const dayOrDays = useMemo(() => (
-        stayDuration % 10 === 1 && stayDuration !== 11?"day":"days"
-    ), [stayDuration]);
-
     const totalPrice = useMemo(() => {
         const price = Array.from("" + data?.priceForNight * stayDuration)
 
@@ -31,7 +31,7 @@ function ReserveCard({data, togglerLabel, onSubmit}) {
         for (let i = price.length - 3; i > 0; i -= 3) {
             price.splice(i, 0, ',')
         }
-        return price;
+        return price.join('');
     }, [stayDuration])
 
     const validate = useCallback(() => {
@@ -60,8 +60,19 @@ function ReserveCard({data, togglerLabel, onSubmit}) {
         setStayDuration(Math.ceil((checkOutDate - checkInDate) / 86_400_000));
     }, [checkInDate, checkOutDate])
 
+    const handleSubmit = (event) => {
+        const metaData = {
+            event,
+            stayDuration : `${stayDuration} ${dayOrDays(stayDuration)}`,
+            checkInDate,
+            checkOutDate,
+            totalPrice 
+        }
+        onSubmit && onSubmit(metaData);
+    }
+
     return (
-            <form className = "reserve__card" onSubmit = {onSubmit}>
+            <form className = "reserve__card" onSubmit = {handleSubmit}>
                 <div className = "reserve__card__title">
                     <span>$ {data?.priceForNight || 0} <span>/ night</span></span>
                     <Stars stars = {data?.starsRate || 0} />
@@ -115,7 +126,7 @@ function ReserveCard({data, togglerLabel, onSubmit}) {
                     <span
                         className = "count__total__price"
                     >
-                        Price for <b>{stayDuration}</b> {dayOrDays} will be <b>${totalPrice}</b>
+                        Price for <b>{stayDuration}</b> {dayOrDays(stayDuration)} will be <b>${totalPrice}</b>
                     </span>
                 }
                 {!!warningMessages.length && <ul className="warnings">

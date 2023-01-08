@@ -6,7 +6,6 @@ import {useParams} from "react-router-dom";
 import $ from "jquery";
 import LoadingComponent from "../../components/ui/LoadingComponent";
 import Modal from "../../components/ui/Modal.jsx";
-
 import ReserveCard from "./ReserveCard.jsx";
 import { API_URL } from "../../settings";
 
@@ -52,6 +51,15 @@ export default function() {
         return brief.join("");
     }, [data.title, data.description])
 
+    const submitReservation = useCallback((metaData) => {
+        alert(
+            `You reserved apartment "${data.title}" for ${metaData.stayDuration}.\n
+            Check in date : ${metaData.checkInDate.toLocaleDateString().replaceAll('/', '.')}
+            Check out date : ${metaData.checkOutDate.toLocaleDateString().replaceAll('/', '.')}\n
+            Total price will be $${metaData.totalPrice}
+            `)
+    }, [data])
+
     if (isLoading || imagesIsLoading) {
         return <LoadingComponent />
     }
@@ -87,7 +95,7 @@ export default function() {
             <ReserveCard 
                 data = {{priceForNight : data?.priceForNight, starsRate : data?.starsRate}}
                 togglerLabel = "Guests"
-                onSubmit = {() => alert("submit")}
+                onSubmit = {submitReservation}
             />
         </div>
         </>
