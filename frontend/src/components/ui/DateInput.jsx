@@ -2,7 +2,7 @@ import scss_module from "./css/dateinput.module.scss";
 import {useState, useEffect, forwardRef, memo} from "react";
 import PropTypes from "prop-types";
 
-function DateInput({initialValue, label, setterCallback, styles = {}, classes = {}}, ref) {
+function DateInput({initialValue, label, setterCallback, onChange, styles = {}, classes = {}}, ref) {
     const [date, setDate] = useState(initialValue || new Date());
     useEffect(() => {
         setterCallback && setterCallback(date);
@@ -10,7 +10,7 @@ function DateInput({initialValue, label, setterCallback, styles = {}, classes = 
 
     return (
         <div className = {classes.wrapper || scss_module.date_wrapper} style = {styles.wrapper || {}}>
-            <input type="date" name = "date__input" ref = {ref}/>
+            <input type="date" name = "date__input" onChange = {({target}) => setDate(new Date(target.value))} ref = {ref}/>
             <div className = {classes.label || scss_module.label} style = {styles.label || {}}>
                 <label htmlFor="date__input">{label}</label>
                 <span>{new Date(date).toISOString().slice(0, 10).replaceAll("-", '/')}</span>

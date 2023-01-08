@@ -1,4 +1,4 @@
-import {useState, memo, useRef} from "react";
+import {useState, memo, useRef, useEffect, useMemo, useCallback} from "react";
 import DateInput from "../../components/ui/DateInput";
 import Counter from "../../components/ui/Counter.jsx";
 import DropDown from "../../components/ui/DropDown.jsx";
@@ -15,7 +15,25 @@ function ReserveCard({data, togglerLabel, onSubmit}) {
     const [isDrDnOpen, setIsDrDnOpen] = useState(false);
     const [checkInDate, setCheckInDate] = useState(new Date());
     const [checkOutDate, setCheckOutDate] = useState(new Date());
-    
+    const [stayDuration, setStayDuration] = useState(0);
+
+    const dayOrDays = useMemo(() => (
+        stayDuration % 10 === 1 && stayDuration !== 11?"day":"days"
+    ), [stayDuration]);
+
+    const totalPrice = useCallback(() => {
+        const price = Array.from("" + data?.priceForNight * stayDuration)
+
+        if (price.length < 3) return price;
+        for (let i = price.length - 3; i > 0; i -= 3) {
+            price.splice(i, 0, ',')
+        }
+        return price;
+    }, [stayDuration])
+
+    useEffect(() => {
+        setStayDuration(Math.ceil((checkOutDate - checkInDate) / 86_400_000));
+    }, [checkInDate, checkOutDate])
 
     return (
             <form className = "reserve__card" onSubmit = {onSubmit}>
@@ -28,13 +46,13 @@ function ReserveCard({data, togglerLabel, onSubmit}) {
                         initialValue={new Date()} 
                         label = "Check in date" 
                         classes={{wrapper : "wrapper", label : "label"}}
-                        onChange = {setCheckInDate}
+                        setterCallback = {setCheckInDate}
                     />
                     <DateInput 
                         initialValue={new Date()} 
                         label = "Check out date" 
                         classes={{wrapper : "wrapper", label : "label"}}
-                        onChange = {setCheckOutDate}
+                        setterCallback = {setCheckOutDate}
                     />
                     <div className = "guests__settings__container">
                         <DropDown 
@@ -68,7 +86,11 @@ function ReserveCard({data, togglerLabel, onSubmit}) {
                     </div>                   
                 </form>
                 <button type = "submit">Reserve</button>
-                <span>Stay for {checkOutDate.toISOString()}</span>
+                <span
+                    className = "count__total__price"
+                >
+                    Price for {stayDuration} {dayOrDays} will be ${totalPrice()}
+                </span>
             </form>
     )
 }
