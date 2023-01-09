@@ -25,7 +25,8 @@ class ImageSerializer(serializers.ModelSerializer):
     class Meta:
         fields = (
             "image",
-            "card"
+            "card",
+            "id"
         )
         model = Image
     

@@ -9,14 +9,6 @@ import { FetchContext } from "../../Layout.jsx";
 import { API_URL, LOCATION_FILTER } from "../../settings.js";
 import EmptyResult from "../../components/ui/EmptyResult.jsx";
 
-function useFetchWithQuery(url, filterName, query){
-    let adress = url;
-    if (filterName && query) {
-        adress += "/" + filterName + "/" + query;
-    }
-    return useFetch(adress);
-}
-
 export default function(props) {
     const {query, setQuery} = useContext(FetchContext);
     const [{data, isLoading, status, error}, setResults] = useState({data : [], isLoading : true, status : "", error: ""});
