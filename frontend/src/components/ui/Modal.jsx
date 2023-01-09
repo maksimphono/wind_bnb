@@ -4,7 +4,7 @@ import $ from "jquery";
 
 function ModalComponent(props){
     const [show, setShow] = useState(props.show)
-    const bgFilter = useRef();
+
 
     const handleClose = event => {
         setShow(false);
@@ -31,6 +31,7 @@ function ModalComponent(props){
                 {props.children}
             </div>
             <div className = {scss.footer}>
+                {props.footer}
             </div>
         </div>
         </>
