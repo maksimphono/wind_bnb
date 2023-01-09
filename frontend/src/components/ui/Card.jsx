@@ -1,5 +1,6 @@
 import {PropsType} from "react";
 import "./css/card_style.scss";
+import { briefText } from "../../utils/helper_tools";
 
 export default function Card(props) {
     return (
@@ -14,7 +15,7 @@ export default function Card(props) {
             </div>
             <div className = "description">
                 <p>
-                    {props.description || "Lorem ipsum dolor sit amet consectetur adipisicing elit. A recusandae, quia temporibus nisi dolores ipsa cum consectetur nemo ut? Magni ratione molestiae nam at laudantium cumque deserunt aperiam veritatis sit!"}
+                    {briefText(props.description, 250) || "Lorem ipsum dolor sit amet consectetur adipisicing elit. A recusandae, quia temporibus nisi dolores ipsa cum consectetur nemo ut? Magni ratione molestiae nam at laudantium cumque deserunt aperiam veritatis sit!"}
                 </p>
             </div>
         </div>

@@ -199,14 +199,14 @@
                 width: auto;
                 aspect-ratio: 1 / 1;
                 max-width: $search-btn-max-width;
-                background:#EB5757;
+                background: $primary_color;
 
                 span.search__label {
                     display: none;
                 }
 
                 &:hover {
-                    background:#EB575790;
+                    background: $primary_color_dark;
                     
                 }
             }

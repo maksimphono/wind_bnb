@@ -15,6 +15,13 @@ $search-bar-border-radius: 16px;
 $ipad_screen_width: 900px;
 $phone_screen_width: 500px;
 
+$primary_color: #EB5757;//rgb(221, 0, 111);
+$primary_color_light: #e7cccc;//rgb(221, 0, 111, .2);
+$primary_color_dark: #923636;//rgb(110, 0, 55);
+
+$dark_color: #444;
+$light_color: #aaa;
+
 @mixin absolute__center {
     position: absolute;
     top: 50vw;

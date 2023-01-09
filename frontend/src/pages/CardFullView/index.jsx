@@ -10,6 +10,7 @@ import ReserveCard from "./ReserveCard.jsx";
 import { API_URL } from "../../settings";
 import { ModalContext } from "../../Layout";
 import ReservationNotice from "./ReservationNotice";
+import { briefText } from "../../utils/helper_tools";
 
 const BRIEF_DESCRIPTION_LEN = 300;
 
@@ -43,15 +44,6 @@ export default function() {
             }
         })
     }, [data])
-
-    const briefText = useCallback((text, numberOfSym) => {
-        if (!text) return;
-        if (text.length < numberOfSym) return text;
-        const brief = [...text];
-
-        brief.splice(numberOfSym, brief.length, "...");
-        return brief.join("");
-    }, [data.title, data.description])
 
     const handleReadMore = useCallback((event) => {
         manageModal.setModalTitle("About " + briefText(data.title, data.title?.indexOf(' ')))
