@@ -1,6 +1,6 @@
 import Card from "../../components/ui/Card.jsx";
 import LoadingComponent from "../../components/ui/LoadingComponent.jsx";
-import {useMemo, useEffect, useContext, useState, useCallback} from "react";
+import {useEffect, useContext, useState, useCallback} from "react";
 import {Link} from "react-router-dom";
 import "./css/card_collection_style.scss";
 import useFetch from "../../hooks/useFetch.jsx";
