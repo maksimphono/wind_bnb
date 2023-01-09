@@ -68,13 +68,6 @@ export default function() {
                 metaData = {metaData}
             />
         )
-        manageModal.setModalButtons([
-            {
-                label : "Close",
-                textColor: "#ddd",
-                bgColor: "#ada"
-            }
-        ])
         manageModal.setShowModal(true);
     }, [data.title])
 
