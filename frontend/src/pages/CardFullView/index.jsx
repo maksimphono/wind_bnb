@@ -68,6 +68,13 @@ export default function() {
                 metaData = {metaData}
             />
         )
+        manageModal.setModalButtons([
+            {
+                label : "Close",
+                textColor: "#ddd",
+                bgColor: "#ada"
+            }
+        ])
         manageModal.setShowModal(true);
     }, [data.title])
 
@@ -99,6 +106,13 @@ export default function() {
             <div className = "owner__info">
                 <p className = "info">Entire house is owed by {owner.name}</p>
                 <img src={owner.avatar} alt={owner.name} className = "avatar" />
+            </div>
+            <div className="conveniences">
+                <ul>
+                    {data.freewifi && <li><i className="material-icons">wifi</i><span>Free wifi avaliable in this apartment</span></li>}
+                    {data.nocancelationfee && <li><i className="material-icons">request_quote</i><span>Booking cancelation without fees</span></li>}
+                    {data.securitysystems && <li><i className="material-icons">gpp_good</i><span>Security system working on this property</span></li>}
+                </ul>
             </div>
             <ReserveCard 
                 data = {{priceForNight : data?.priceForNight, starsRate : data?.starsRate}}

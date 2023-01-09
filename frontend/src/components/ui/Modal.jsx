@@ -31,6 +31,7 @@ function ModalComponent(props){
                 {props.children}
             </div>
             <div className = {scss.footer}>
+                {props.footer}
             </div>
         </div>
         </>

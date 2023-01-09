@@ -15,14 +15,15 @@ function Layout(props) {
     const [showModal, setShowModal] = useState(false);
     const [modalText, setModalText] = useState("")
     const [modalTitle, setModalTitle] = useState("")
+    const [modalFooter, setModalFooter] = useState([])
 
     return (
         <>
-            <Modal show = {showModal} title = {modalTitle} onHide = {() => setShowModal(false)}>
+            <Modal show = {showModal} title = {modalTitle} footer = {modalFooter} onHide = {() => setShowModal(false)}>
                 <p>{modalText}</p>
             </Modal>
             <FetchContext.Provider value = {{query : query, setQuery : setQuery}}>
-                <ModalContext.Provider value = {{setShowModal, setModalText, setModalTitle}}>
+                <ModalContext.Provider value = {{setShowModal, setModalText, setModalTitle, setModalFooter}}>
                     <Header />
                     <Outlet />
                 </ModalContext.Provider>
