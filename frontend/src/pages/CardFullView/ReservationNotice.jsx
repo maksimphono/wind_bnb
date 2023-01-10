@@ -3,12 +3,12 @@ import EmptyResult from "../../components/ui/EmptyResult"
 function ReservationNotice({title, metaData}) {
     if (metaData == undefined) return <EmptyResult />
 
-    const style = useMemo(() => ({
+    const style = {
         totalPrice : {
             fontSize: "1.5rem",
             fontFamily: "sans-serif"
         }
-    }), [])
+    }
 
     return (
         <p>
