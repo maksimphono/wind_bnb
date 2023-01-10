@@ -60,7 +60,7 @@ function ReserveCard({data, togglerLabel, onSubmit}) {
         setStayDuration(Math.ceil((checkOutDate - checkInDate) / 86_400_000));
     }, [checkInDate, checkOutDate])
 
-    const handleSubmit = (event) => {
+    const handleSubmit = event => {
         const metaData = {
             event,
             stayDuration : `${stayDuration} ${dayOrDays(stayDuration)}`,
