@@ -6,7 +6,7 @@ import "./css/card_collection_style.scss";
 import useFetch from "../../hooks/useFetch.jsx";
 import $ from "jquery"
 import { FetchContext } from "../../Layout.jsx";
-import { API_URL, LOCATION_FILTER } from "../../settings.js";
+import { fetchWithLocation } from "../../utils/fetch_tools.js";
 import EmptyResult from "../../components/ui/EmptyResult.jsx";
 
 export default function(props) {
@@ -23,17 +23,8 @@ export default function(props) {
     }, []);
 
     useEffect(() => {
-        let url = API_URL
-        if (query?.location?.id) {
-            url += "/" + LOCATION_FILTER + "=" + query.location.id;
-        }
-        $.ajax({
-            url : url,
-            dataType : "json",
-            success : (data) => (setResults({data : data, isLoading : false, status : "success", error : "noerr"})),
-            error : (err) => (setResults({data : data, isLoading : false, status : "error", error : err}))
-        })
-        
+        fetchWithLocation(query)
+            .then(newResults => setResults(newResults));
     }, [query]);
 
     useEffect(() => {

@@ -7,10 +7,11 @@ import $ from "jquery";
 import LoadingComponent from "../../components/ui/LoadingComponent";
 import Modal from "../../components/ui/Modal.jsx";
 import ReserveCard from "./ReserveCard.jsx";
-import { API_URL } from "../../settings";
+import { API_URL} from "../../settings";
 import { ModalContext } from "../../Layout";
 import ReservationNotice from "./ReservationNotice";
 import { briefText } from "../../utils/helper_tools";
+import {fetchOwner} from "../../utils/fetch_tools.js";
 
 const BRIEF_DESCRIPTION_LEN = 300;
 
@@ -34,19 +35,11 @@ export default function() {
         }
     }, [dataImages]);
 
-    useEffect(function fetchOwner() {
-        if (data == undefined) return;
-        $.ajax({
-            url : API_URL + "/owner/" + data.owner,
-            dataType : "json",
-            success: function (ownerData) {
-                setOwner(ownerData);
-            },
-            error : function (err) {
-                console.log("Error while fetching owner info : ", err);
-            }
-        })
-    }, [data])
+    useEffect(() => {
+        fetchOwner(data)
+            .then(result => setOwner(result))
+            .catch(error => console.log("Error while fetching owner info : " + error))
+    }, [data]);
 
     const handleReadMore = useCallback((event) => {
         manageModal.setModalTitle("About " + briefText(data.title, data.title?.indexOf(' ')))

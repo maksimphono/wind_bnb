@@ -12,7 +12,6 @@
     border-radius: $card-border-radius;
     padding-bottom: 1rem;
     //overflow: hidden;
-    //overflow: hidden;
     cursor: pointer;
 
     &:hover {
@@ -85,7 +84,7 @@
     .description {
         display: flex;
         width: auto;
-        height: 100%;
+        height: auto;
         overflow: hidden;
 
         p {
