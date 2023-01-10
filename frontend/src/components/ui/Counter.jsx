@@ -35,23 +35,27 @@ const Counter = React.forwardRef(function (props, counterRef) {
             <span className = "title">{props.title}</span>
             <span className = "subtitle">{props.subtitle}</span>
             <div className = "counter__wrapper">
-                <button 
-                    type = "button"
-                    className = "control__btn" 
-                    data-action = {DECREACE}
-                    onClick = {handleValueChange}
-                >
-                    -
-                </button>
+                <div className="material-icons">
+                    <button 
+                        type = "button"
+                        className = "control__btn material-icons" 
+                        data-action = {DECREACE}
+                        onClick = {handleValueChange}
+                    >
+                        remove
+                    </button>
+                </div>
                 <span id = {"" + props.id} ref = {counterRef} data-value = {counter}>{counter}</span>
-                <button 
-                    type = "button"
-                    className = "control__btn" 
-                    data-action = {INCREACE}
-                    onClick = {handleValueChange}
-                >
-                    +
-                </button>
+                <div className="material-icons">
+                    <button 
+                        type = "button"
+                        className = "control__btn" 
+                        data-action = {INCREACE}
+                        onClick = {handleValueChange}
+                    >
+                        add
+                    </button>
+                </div>
             </div>
         </div>
     )

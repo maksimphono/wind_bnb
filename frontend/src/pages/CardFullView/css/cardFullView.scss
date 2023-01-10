@@ -388,13 +388,14 @@
                         }
 
                         button {
-                            display: block;
+                            all: unset;
+                            display: grid;
+                            place-items: center;
                             background: #eee;
                             width: 40px;
                             aspect-ratio: 1 / 1;
                             border: 1px solid #444;
                             border-radius: 50%;
-                            font-size: 200%;
                             background: #fff;
                             box-shadow: 0 0 3px #555;
                             cursor: pointer;
