@@ -1,4 +1,4 @@
-import {useRef, useState, useMemo, useEffect} from "react";
+import {useRef, useState, useMemo, useEffect, useCallback} from "react";
 import React from "react";
 import $ from "jquery";
 import { toggleElem } from "./Haeder";
@@ -19,13 +19,13 @@ export default React.forwardRef(function(props, ref) {
         $(selectionDivRef.current)?.find("ul.selection").css("height", !props.show? "0px": "max-content");
     }, [props.show]);
     
-    const onSelectItem = (index) => {
+    const onSelectItem = useCallback((index) => {
         setSelectedItemIndex(index);
-    }
+    }, []);
 
-    const onToggleSelectionDiv = (event) => {
+    const onToggleSelectionDiv = useCallback((event) => {
         props.toggle(v => !v);
-    }
+    }, [props.show, props.toggle]);
     
     return (
         <div className = "search-bar" name = "search__filters">

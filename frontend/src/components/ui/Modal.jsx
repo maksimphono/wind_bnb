@@ -1,15 +1,13 @@
 import scss from "./css/modal.module.scss"
-import {useState, useMemo, useEffect, useRef, memo} from "react";
-import $ from "jquery";
+import {useState, useMemo, useEffect, useCallback, memo} from "react";
 
 function ModalComponent(props){
     const [show, setShow] = useState(props.show)
 
-
-    const handleClose = event => {
+    const handleClose = useCallback(event => {
         setShow(false);
         props.onHide && props.onHide()
-    }
+    }, [props.onHide])
 
     useEffect(() => {
         setShow(props.show);

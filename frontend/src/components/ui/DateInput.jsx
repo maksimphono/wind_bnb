@@ -2,11 +2,12 @@ import scss_module from "./css/dateinput.module.scss";
 import {useState, useEffect, forwardRef, memo} from "react";
 import PropTypes from "prop-types";
 
-function DateInput({initialValue, label, setterCallback, onChange, styles = {}, classes = {}}, ref) {
+function DateInput({initialValue, label, setterCallback, styles = {}, classes = {}}, ref) {
     const [date, setDate] = useState(initialValue || new Date());
+    
     useEffect(() => {
         setterCallback && setterCallback(date);
-    }, [date]);
+    }, [date, setterCallback]);
 
     return (
         <div className = {classes.wrapper || scss_module.date_wrapper} style = {styles.wrapper || {}}>

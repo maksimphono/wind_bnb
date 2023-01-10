@@ -1,4 +1,4 @@
-import { useRef, useReducer, useState, useContext } from "react";
+import { useRef, useCallback, useState, useContext } from "react";
 import {Link} from "react-router-dom";
 import "./css/header.scss";
 //import searchIcon from "../../assets/icons/search__icon.svg";
@@ -21,15 +21,16 @@ export function toggleElem(elem, hide) {
 }
 
 export default function (props) {
+    const {query, setQuery} = useContext(FetchContext);
+
     const [showLocationSelect, setShowLocationSelect] = useState(false);
     const [showGuestsSelect, setShowGuestsSelect] = useState(false);
     const [showSearchLabel, toggleSearchLabel] = useState(false);
+    
     const {data : locationsData, isLoading : locationsDataIsLoading} = useFetch(API_URL + "/locations")
-    const {setQuery} = useContext(FetchContext);
-
-    const onSubmit = (event) => {
-        event.preventDefault()
-        const $target = $(event.target);
+    
+    const onSubmit = useCallback((event) => {
+        event.preventDefault();
         const querySelection = {
             location: {
                 id : $("#" + location_selection_fielt_id)[0].dataset.value,
@@ -37,15 +38,15 @@ export default function (props) {
             },
             adults : +$("#" + adults_number_field_id)[0].dataset.value,
             children : +$("#" + children_number_field_id)[0].dataset.value
-        }
+        };
         setQuery && setQuery(querySelection);
-    }
+    }, [query]);
 
-    const onToggleSelection = (val) => {
+    const onToggleSelection = useCallback((val) => {
         setShowLocationSelect(val);
         setShowGuestsSelect(val);
         toggleSearchLabel(false);
-    }
+    }, []);
 
     return (
         <div className = "header">

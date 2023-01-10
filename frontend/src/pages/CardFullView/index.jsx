@@ -15,15 +15,18 @@ import { briefText } from "../../utils/helper_tools";
 const BRIEF_DESCRIPTION_LEN = 300;
 
 export default function() {
+    const {id} = useParams();
+    const manageModal = useContext(ModalContext);
+
     const [showImages, setShowImages] = useState(false);
     const [showAboutModal, setShowAboutModal] = useState(false);
-    const onShowImages = useCallback(() => setShowImages(true));
-    const {id} = useParams();
-    const {data, isLoading, status, error} = useFetch(API_URL + "/" + id);
     const [owner, setOwner] = useState({ownerData : null, ownerIsLoading : null});
-    const {data : dataImages, isLoading : imagesIsLoading, status : imagesStatus, error : imagesError} = useFetch(API_URL + "/image/" + id)
-    const manageModal = useContext(ModalContext);
     
+    const {data, isLoading, status, error} = useFetch(API_URL + "/" + id);
+    const {data : dataImages, isLoading : imagesIsLoading, status : imagesStatus, error : imagesError} = useFetch(API_URL + "/image/" + id)
+
+    const onShowImages = useCallback(() => setShowImages(true));
+
     useEffect(() => {
         $(".images img").on("click", onShowImages);
         return () => {
