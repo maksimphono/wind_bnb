@@ -25,13 +25,15 @@ class ImageSerializer(serializers.ModelSerializer):
     class Meta:
         fields = (
             "image",
-            "card"
+            "card",
+            "id"
         )
         model = Image
     
 class OwnerSerializer(serializers.ModelSerializer):
     class Meta:
         fields = (
+            "id",
             "avatar",
             "name"
         )

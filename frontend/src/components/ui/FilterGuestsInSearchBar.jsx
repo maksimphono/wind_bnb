@@ -1,4 +1,4 @@
-import {useRef, useMemo, useEffect, useState} from "react";
+import {useRef, useMemo, useEffect, useState, useCallback} from "react";
 import React from "react";
 import $ from "jquery";
 import GuestCounter from "./Counter.jsx";
@@ -8,22 +8,19 @@ import {adults_number_field_id, children_number_field_id} from "../../data/field
 export default function({adultsCounterRef, childrenCounterRef, ...props}) {
     const [adultsNumber, setAdultsNumber] = useState(1);
     const [childrenNumber, setChildrenNumber] = useState(0);
-
-    //const adultsCounterRef = useRef();
-    //const childrenCounterRef = useRef();
     
     const selectedItemRef = useRef();
     const selectionDivRef = useRef();
-    const $selectedItemSpan = $(selectedItemRef.current);
-    const $selectionDiv = $(selectionDivRef.current);
+
+    const $selectionDiv = useMemo(() => $(selectionDivRef.current), [props.show]);
     
     useEffect(() => {
         $selectionDiv?.find("ul.selection").css("height", !props.show? "0px": "max-content");
     }, [props.show]);
 
-    const onToggleSelection = (event) => {
+    const onToggleSelection = useCallback((event) => {
         props.toggle(v => !v);
-    }
+    }, [props.show, props.toggle]);
     
     return (
         <div className = "search-bar" name = "search__filters">

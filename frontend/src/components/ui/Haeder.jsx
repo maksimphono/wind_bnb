@@ -1,4 +1,4 @@
-import { useRef, useReducer, useState, useContext } from "react";
+import { useRef, useCallback, useState, useContext } from "react";
 import {Link} from "react-router-dom";
 import "./css/header.scss";
 //import searchIcon from "../../assets/icons/search__icon.svg";
@@ -11,6 +11,7 @@ import $ from "jquery";
 import useFetch from "../../hooks/useFetch.jsx";
 
 import {location_selection_fielt_id, adults_number_field_id, children_number_field_id} from "../../data/fields_html_ids.js";
+import { API_URL } from "../../settings";
 
 export function toggleElem(elem, hide) {
     $(elem).css({
@@ -20,28 +21,32 @@ export function toggleElem(elem, hide) {
 }
 
 export default function (props) {
+    const {query, setQuery} = useContext(FetchContext);
+
     const [showLocationSelect, setShowLocationSelect] = useState(false);
     const [showGuestsSelect, setShowGuestsSelect] = useState(false);
     const [showSearchLabel, toggleSearchLabel] = useState(false);
-    const {setQuery} = useContext(FetchContext);
-
-    const onSubmit = (event) => {
-        event.preventDefault()
-        const $target = $(event.target);
+    
+    const {data : locationsData, isLoading : locationsDataIsLoading} = useFetch(API_URL + "/locations")
+    
+    const onSubmit = useCallback((event) => {
+        event.preventDefault();
         const querySelection = {
-            location: $("#" + location_selection_fielt_id)[0].dataset.value,
+            location: {
+                id : $("#" + location_selection_fielt_id)[0].dataset.value,
+                name : $("#" + location_selection_fielt_id)[0].dataset.name,
+            },
             adults : +$("#" + adults_number_field_id)[0].dataset.value,
             children : +$("#" + children_number_field_id)[0].dataset.value
-        }
-        console.table(querySelection);
+        };
         setQuery && setQuery(querySelection);
-    }
+    }, [query]);
 
-    const onToggleSelection = (val) => {
+    const onToggleSelection = useCallback((val) => {
         setShowLocationSelect(val);
         setShowGuestsSelect(val);
         toggleSearchLabel(false);
-    }
+    }, []);
 
     return (
         <div className = "header">
@@ -52,14 +57,15 @@ export default function (props) {
                 onMouseLeave={(e) => onToggleSelection(false)}
                 onSubmit = {onSubmit}
             >
-                
-                <FilterInSearchBar 
-                    show = {showLocationSelect}
-                    toggle = {setShowLocationSelect}
-                    location_selection_id = "location_selection_id"
-                    title = "Location" 
-                    list = {["", "Finland, Helsinki", "Finland, Guavar", "Thailand, Lopburi"]}
-                />
+                {locationsData.length && 
+                    <FilterInSearchBar 
+                        show = {showLocationSelect}
+                        toggle = {setShowLocationSelect}
+                        location_selection_id = "location_selection_id"
+                        title = "Location" 
+                        list = {locationsData}
+                    />
+                }
                 <FilterGuestsInSearchBar 
                     show = {showGuestsSelect}
                     toggle = {setShowGuestsSelect} 

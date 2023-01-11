@@ -3,13 +3,9 @@ import PropTypes from "prop-types";
 import $ from "jquery";
 import styles from "./css/drowpdown.module.scss"
 
-function toggleReducer(state, action) {
-    action.setterCallback && action.setterCallback(action?.state || !state);
-    return (action?.state || !state);
-}
-
 function DrowDown({children, ...props}) {
     const [isOpen, setIsOpen] = useState(props.isOpen || false);
+    
     let togglerRef = useRef();
     let selectionRef = useRef();
 
@@ -22,21 +18,17 @@ function DrowDown({children, ...props}) {
         }
     }, []);
 
-    const handleBlur = (event) => {
-        console.log(" Event : ", event.target);
-        console.log("ref", togglerRef.current);
-        console.log("select: ", Array.from($(event.target).parents()).includes(selectionRef.current));
-        
+    const handleBlur = useCallback((event) => {
         if (event.target != togglerRef.current && !Array.from($(event.target).parents()).includes(selectionRef.current)) {
             setIsOpen(false);
         }
 
         props.setterCallback && props.setterCallback(false);
-    }
+    }, [props.setterCallback]);
 
-     const handleToggle = (event) => {
+     const handleToggle = useCallback((event) => {
         setIsOpen(v => !v);
-     }
+     }, [isOpen]);
 
      useEffect(() => {
         setIsOpen(props.isOpen);

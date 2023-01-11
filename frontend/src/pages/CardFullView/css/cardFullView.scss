@@ -1,3 +1,5 @@
+@import "../../../assets/settings.scss";
+
 .card__full__view {
     display: grid;
     //flex-flow: column nowrap;
@@ -30,7 +32,7 @@
             display: flex;
             align-items: center;
             i {
-                color: #f77;
+                color: $primary_color;
             }
         }
 
@@ -59,7 +61,7 @@
         gap: 10px;
         max-height: 600px;
 
-        @media screen and (max-width : 800px) {
+        @media screen and (max-width : $ipad_screen_width) {
             & {
                 grid-template: 1fr / 1fr;
                 img:first-child {
@@ -75,19 +77,23 @@
 
         img {
             display: block;
-            width: auto;
+            width: 100%;
             height: 100%;
             max-height: 100%;
             max-width: 100%;
             border-radius: 5px;
             outline: 1px solid #777;
             object-fit: cover;
+            overflow: hidden;
             cursor: pointer;
 
             &:first-child {
                 grid-column: 1 / 2;
                 grid-row: 1 / span 2;
                 min-width: 100%;
+            }
+            &:nth-child(n + 6) {
+                display: none;
             }
         }
     }
@@ -100,8 +106,22 @@
         word-wrap: break-word;
         border: 1px solid #444;
         border-radius: 5px;
-        padding: 3%;
+        padding: max(3%, 20px);
         overflow: auto;
+        font-size: 1.2rem;
+
+        button.read__more {
+            all: unset;
+            display: flex;
+            margin-top: 20px;
+            text-decoration: underline;
+            font-size: 1.3rem;
+            cursor: pointer;
+
+            &:hover {
+                color: rgb(196, 169, 207);
+            }
+        }
     }
 
     .owner__info {
@@ -113,7 +133,7 @@
         height: max-content;
         border-bottom: 2px solid #666;
 
-        @media screen and (max-width : 800px) {
+        @media screen and (max-width : $ipad_screen_width) {
             & {
                 grid-column: 1 / span 3;
                 width: 100%;
@@ -125,9 +145,69 @@
             font-weight: 400;
         }
 
-        img {
-            width: 50px;
-            height: 50px;
+        img.avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            border: 4px solid $primary_color;
+            object-fit: cover;
+            transform: scale(1);
+            transition: .5s;
+            cursor: zoom-in;
+
+            &:hover {
+                transform: scale(2);
+            }
+        }
+    }
+    .conveniences {
+        grid-column: 1 / span 2;
+        height: 100%;
+        
+        @media screen and (max-width : $ipad_screen_width) {
+            & {
+                grid-column: 1 / span 3;
+                width: 100%;
+                height: 100%;
+            }
+        }
+        
+        ul {
+            display: flex;
+            flex-direction: column;
+            //align-items: center;
+            gap: 10px;
+            width: 100%;
+            height: 100%;
+            li {
+                display: grid;
+                grid-template-columns: 15% 1fr 15%;
+                justify-items: center;
+                align-items: center;
+                height: 30%;
+                min-height: 90px;
+                width: 100%;
+                background: $primary_color_light;
+                border: 4px double $primary_color;
+                border-radius: 10px;
+                font-size: 1.6rem;
+                //padding-inline: 5%;
+                font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+
+                @media screen and (max-width : $ipad_screen_width) {
+                    & {
+                        font-size: 1.3rem;
+                    }
+                }
+
+                i {
+                    justify-self: center;
+                    font-size: 2rem;
+                }
+                span {
+                    justify-self: center;
+                }
+            }
         }
     }
 
@@ -137,13 +217,14 @@
         flex-direction: column;
         align-items: center;
         width: 300px;
-        height: 300px;
+        min-height: 350px;
+        height: max-content;
         padding: 20px 20px;
         border-radius: 1rem;
         background: rgb(244, 244, 244);
         box-shadow: 0 0 5px rgb(45, 45, 45);
 
-        @media screen and (max-width : 800px) {
+        @media screen and (max-width : $ipad_screen_width) {
             & {
                 grid-column: 2 / span 1;
             }
@@ -169,13 +250,12 @@
             align-self: center;
             display: grid;
             grid-template: 1fr 1fr / 1fr 1fr;
-            gap: 1px;
-            width: 85%;
+            width: 100%;
             height: max-content;
             margin: 10%;
-            background: rgb(43, 43, 43);
+            //background: rgb(43, 43, 43);
             border-radius: inherit;
-            border: 1px solid rgb(43, 43, 43);
+            border: 2px solid rgb(43, 43, 43);
             overflow: visible;
 
             @mixin font-padding-for-labels {
@@ -195,10 +275,11 @@
                 width: 100%;
                 height: 100%;
                 overflow: hidden;
-                
+                border-bottom: inherit;
                 border-radius: 0;
                 &:nth-child(1) {
                     border-top-left-radius: inherit;
+                    border-right: inherit;
                 }
                 &:nth-child(2) {
                     border-top-right-radius: inherit;
@@ -208,7 +289,6 @@
                     grid-area: item;
                     display: flex;
                     opacity: 0;
-                    //margin-left: -50%;
                     width: 100%;
                     height: 100%;
                     border: none;
@@ -308,13 +388,14 @@
                         }
 
                         button {
-                            display: block;
+                            all: unset;
+                            display: grid;
+                            place-items: center;
                             background: #eee;
                             width: 40px;
                             aspect-ratio: 1 / 1;
                             border: 1px solid #444;
                             border-radius: 50%;
-                            font-size: 200%;
                             background: #fff;
                             box-shadow: 0 0 3px #555;
                             cursor: pointer;
@@ -337,18 +418,34 @@
             justify-content: center;
             align-items: center;
             width: 100%;
-            height: 20%;
+            height: 50px;
             border: none;
             border-radius: inherit;
-            background: rgb(221, 0, 111);
+            background: $primary_color;
             color: #fff;
             font-weight: 500;
             font-size: 120%;
             cursor: pointer;
 
             &:hover {
-                background: rgb(139, 2, 71);
+                background: $primary_color_dark;
             }
+            &:disabled {
+                background: $primary_color_dark;
+                cursor: not-allowed;
+            }
+        }
+        .count__total__price {
+            margin-top: 20px;
+            color: #333;
+        }
+        ul.warnings {
+            margin-top: 20px;
+            display: block;
+            width: 90%;
+            height: max-content;
+            font-size: .9rem;
+            color: $primary_color;
         }
     }
 }

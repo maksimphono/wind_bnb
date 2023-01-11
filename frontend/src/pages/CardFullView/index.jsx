@@ -1,22 +1,32 @@
 import "./css/cardFullView.scss";
-import Counter from "../../components/ui/Counter.jsx";
-import DropDown from "../../components/ui/DropDown.jsx";
 import ImagesView from "./ImagesView.jsx";
-import {useState, useEffect, useCallback} from "react";
+import {useState, useEffect, useCallback, useMemo, useContext} from "react";
 import useFetch from "../../hooks/useFetch.jsx";
 import {useParams} from "react-router-dom";
 import $ from "jquery";
 import LoadingComponent from "../../components/ui/LoadingComponent";
-import DateInput from "../../components/ui/DateInput";
-import { API_URL } from "../../settings";
+import Modal from "../../components/ui/Modal.jsx";
+import ReserveCard from "./ReserveCard.jsx";
+import { API_URL} from "../../settings";
+import { ModalContext } from "../../Layout";
+import ReservationNotice from "./ReservationNotice";
+import { briefText } from "../../utils/helper_tools";
+import {fetchOwner} from "../../utils/fetch_tools.js";
+
+const BRIEF_DESCRIPTION_LEN = 300;
 
 export default function() {
-    const [showImages, setShowImages] = useState(false);
-    const [isOpenDrop, setIsOpenDrop] = useState(false);
-    const onShowImages = useCallback(() => setShowImages(true));
     const {id} = useParams();
+    const manageModal = useContext(ModalContext);
+
+    const [showImages, setShowImages] = useState(false);
+    const [showAboutModal, setShowAboutModal] = useState(false);
+    const [owner, setOwner] = useState({ownerData : null, ownerIsLoading : null});
+    
     const {data, isLoading, status, error} = useFetch(API_URL + "/" + id);
     const {data : dataImages, isLoading : imagesIsLoading, status : imagesStatus, error : imagesError} = useFetch(API_URL + "/image/" + id)
+
+    const onShowImages = useCallback(() => setShowImages(true));
 
     useEffect(() => {
         $(".images img").on("click", onShowImages);
@@ -25,69 +35,74 @@ export default function() {
         }
     }, [dataImages]);
 
+    useEffect(() => {
+        fetchOwner(data)
+            .then(result => setOwner(result))
+            .catch(error => console.log("Error while fetching owner info : " + error))
+    }, [data]);
+
+    const handleReadMore = useCallback((event) => {
+        manageModal.setModalTitle("About " + briefText(data.title, data.title?.indexOf(' ')))
+        manageModal.setModalText(data.description)
+        manageModal.setShowModal(true)
+    }, [data.title, data.description])
+
+    const submitReservation = useCallback((metaData) => {
+        metaData.event.preventDefault()
+        manageModal.setModalTitle("Apartment reservation")
+        manageModal.setModalText(
+            <ReservationNotice 
+                title = {data.title} 
+                metaData = {metaData}
+            />
+        )
+        manageModal.setShowModal(true);
+    }, [data.title])
+
     if (isLoading || imagesIsLoading) {
         return <LoadingComponent />
     }
 
     return (
         <>
+        <Modal show = {showAboutModal} title = {"About " + briefText(data.title, data.title?.indexOf(' '))} onHide = {() => setShowAboutModal(false)}>
+            <p>{data.description}</p>
+        </Modal>
         <ImagesView show = {showImages} images = {dataImages} handleClose = {() => setShowImages(false)}/>
         <div className = "card__full__view">
             <div className = "card__title">
                 <h2>{data.title}</h2>
                 <span className = "star__number"><i className="material-icons">star</i>{data.starsRate} stars</span>
                 <span className = "superhost">Superhost</span>
-                <span className = "adress">Ko Samui, Chang Wat Surat Thani, Thailand</span>
+                <span className = "adress">{data.adress}</span>
             </div>
             <div className = "images">
                 {dataImages.map(item => 
-                    <img key = {item.card} src={item.image} alt="" />
+                    <img key = {item.card} src={item.image} alt={data.title} />
                 )}
             </div>
             <p className="description">
-                {data.description}
+                {briefText(data.description, BRIEF_DESCRIPTION_LEN)}
+                {data.description.length >= BRIEF_DESCRIPTION_LEN && 
+                    <button className = "read__more" onClick = {handleReadMore}>Read more...</button>
+                }
             </p>
             <div className = "owner__info">
-                <p className = "info">Entire house is owed by {data.owner}</p>
-                <img src="" alt="" className = "avatar" />
+                <p className = "info">Entire house is owed by {owner.name}</p>
+                <img src={owner.avatar} alt={owner.name} className = "avatar" />
             </div>
-            <form className = "reserve__card">
-                <div className = "reserve__card__title">
-                    <span>{data.priceForNight} <span>/ night</span></span>
-                    <span style = {{display: "flex", alignItems: "center"}}><i className="material-icons" style = {{color : "#f77"}}>star</i>{data.starsRate} stars</span>
-                </div>
-                <form className = "set__in-out__date">
-                    <DateInput initialValue={new Date()} label = "Check in date" classes={{wrapper : "wrapper", label : "label"}}/>
-                    <DateInput initialValue={new Date()} label = "Check out date" classes={{wrapper : "wrapper", label : "label"}}/>
-                    <div className = "guests__settings__container">
-                        <DropDown toggler = "Guests" isOpen = {isOpenDrop} setterCallback = {setIsOpenDrop} style = {{width : "100%", height: "100%"}} togglerStyle = {{height: "100%"}}>
-                            <Counter 
-                                title = {<span>Adults<i className="material-icons">person</i></span>}
-                                subtitle = "Age 13+" 
-                                initialValue = {1} 
-                                max = {10} 
-                                min = {0}/>
-                            <Counter 
-                                title = {<span>Children<i className="material-icons">child_care</i></span>} 
-                                subtitle = "Age 2 - 12" 
-                                max = {10} 
-                                min = {0}/>
-                            <Counter 
-                                title = {<span>Infants<i className="material-icons">child_friendly</i></span>}
-                                subtitle = "Age 0 - 2" 
-                                max = {2} 
-                                min = {0}/>
-                            <Counter 
-                                title =  {<span>Pets<i className="material-icons">cruelty_free</i></span>}
-                                subtitle = "Animals"  
-                                max = {4} 
-                                min = {0}/>
-                        </DropDown>
-                    </div>
-                    
-                </form>
-                <button type = "submit">Reserve</button>
-            </form>
+            <div className="conveniences">
+                <ul>
+                    {data.freewifi && <li><i className="material-icons">wifi</i><span>Free wifi avaliable in this apartment</span></li>}
+                    {data.nocancelationfee && <li><i className="material-icons">request_quote</i><span>Booking cancelation without fees</span></li>}
+                    {data.securitysystems && <li><i className="material-icons">gpp_good</i><span>Security system working on this property</span></li>}
+                </ul>
+            </div>
+            <ReserveCard 
+                data = {{priceForNight : data?.priceForNight, starsRate : data?.starsRate}}
+                togglerLabel = "Guests"
+                onSubmit = {submitReservation}
+            />
         </div>
         </>
     )
