@@ -2,7 +2,6 @@ import { useRef, useCallback, useState, useContext } from "react";
 import {Link} from "react-router-dom";
 import "./css/header.scss";
 //import searchIcon from "../../assets/icons/search__icon.svg";
-import logo from "../../logo.svg"
 import FilterInSearchBar from "./FilterInSearchBar";
 import FilterGuestsInSearchBar from "./FilterGuestsInSearchBar";
 import SearchButton from "./SearchButton";

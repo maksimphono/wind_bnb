@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './assets/global.css';
 import CardCollection from "./pages/CardsCollection/CardCollection.jsx";
 import CardFullView from "./pages/CardFullView/index.jsx";
