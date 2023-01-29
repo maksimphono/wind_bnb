@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/static/css/main.a238e447.css",
+    "main.js": "/static/js/main.f50431b0.js",
+    "static/js/787.6d139210.chunk.js": "/static/js/787.6d139210.chunk.js",
+    "static/media/WindBnBLogo.png": "/static/media/WindBnBLogo.e0185a7523a8653be480.png",
+    "static/media/logo.svg": "/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
+    "index.html": "/index.html",
+    "main.a238e447.css.map": "/static/css/main.a238e447.css.map",
+    "main.f50431b0.js.map": "/static/js/main.f50431b0.js.map",
+    "787.6d139210.chunk.js.map": "/static/js/787.6d139210.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.a238e447.css",
+    "static/js/main.f50431b0.js"
+  ]
+}
